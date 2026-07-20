@@ -1,0 +1,14 @@
+package_mode_id: 0
+
+# CsI / Calo 共用：TriggerID 与 TimeCode 前八位（秒）须同时匹配才画波形
+# TimeCode 与 caloTimeCode.png 横轴整数部分一致（相对 2024-06-26 10:40:57 北京时间）
+# draw_wave_events 由解码生成的 *_csi_first_cross_late.txt 填入（每行一对 trigger/time_code）
+draw_wave_events:
+  trigger_id: [732, 1307, 3642, 1396, 4, 1294, 1703, 1535, 2275, 3400, 3717, 243, 3350, 1020, 3435, 2431]
+  time_code: [60697803, 60698437, 60698742, 60698990, 60699345, 60699519, 60699572, 60700102, 60700738, 60700886, 60700926, 60701006, 60701425, 60701670, 60701989, 60702398]
+
+time_code_min: 0
+time_code_max: 1.0e14
+
+# 8 通道各自独立：第一个过阈点 + 其后 9 点须全部过阈，否则该通道不记；取 max(first_sp)，若 > 65 则写入 late txt
+csi_first_cross_hist: true

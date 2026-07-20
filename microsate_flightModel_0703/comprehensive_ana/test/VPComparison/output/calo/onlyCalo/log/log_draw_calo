@@ -1,0 +1,4 @@
+
+Processing /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA_Final/microsate_flightModel_0703/cosmic_ped/scripts/draw_calo.cxx(1,"pack.root",1,200,false)...
+ Draw pack.root [filter: nCrystalHit==1, threshold=200] [linear bins]
+N_total :499507

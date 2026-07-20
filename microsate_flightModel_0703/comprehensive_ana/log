@@ -1,0 +1,2765 @@
+数据目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat
+结果目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat
+后缀: .pkg .dat .bin
+==========================================
+[skip] CsI_Calo_260531_1926  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260531_1926)
+[skip] CsI_Calo_260609_1553  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260609_1553)
+[skip] CsI_Calo_260609_1554  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260609_1554)
+[skip] CsI_Calo_260609_1608  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260609_1608)
+[skip] CsI_Calo_260609_1638  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260609_1638)
+[skip] CsI_Calo_260609_1916  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260609_1916)
+[skip] CsI_Calo_260609_1956  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260609_1956)
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_1308.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1308
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_1308.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1308
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.621s
+user	0m0.287s
+sys	0m0.293s
+
+real	0m0.948s
+user	0m0.749s
+sys	0m0.178s
+
+real	0m0.688s
+user	0m0.506s
+sys	0m0.176s
+
+real	0m4.694s
+user	0m4.215s
+sys	0m0.429s
+
+real	0m4.685s
+user	0m4.497s
+sys	0m0.169s
+
+real	0m1.641s
+user	0m1.335s
+sys	0m0.297s
+======== ped ========
+
+real	0m0.942s
+user	0m0.732s
+sys	0m0.186s
+
+real	0m1.170s
+user	0m0.969s
+sys	0m0.172s
+
+real	0m0.695s
+user	0m0.516s
+sys	0m0.164s
+
+real	0m5.618s
+user	0m4.781s
+sys	0m0.794s
+
+real	0m4.855s
+user	0m4.633s
+sys	0m0.183s
+
+real	0m1.779s
+user	0m1.513s
+sys	0m0.256s
+======== amp ========
+
+real	0m0.464s
+user	0m0.252s
+sys	0m0.191s
+
+real	0m0.609s
+user	0m0.431s
+sys	0m0.176s
+
+real	0m4.419s
+user	0m3.804s
+sys	0m0.561s
+
+real	0m1.369s
+user	0m1.109s
+sys	0m0.243s
+
+real	0m1.401s
+user	0m1.267s
+sys	0m0.128s
+
+real	0m3.740s
+user	0m3.296s
+sys	0m0.378s
+
+real	0m1.515s
+user	0m1.219s
+sys	0m0.279s
+
+real	0m1.226s
+user	0m1.072s
+sys	0m0.150s
+======== wave ========
+
+real	0m0.476s
+user	0m0.265s
+sys	0m0.194s
+
+real	0m0.619s
+user	0m0.438s
+sys	0m0.179s
+
+real	0m3.844s
+user	0m3.388s
+sys	0m0.409s
+
+real	0m1.613s
+user	0m1.334s
+sys	0m0.260s
+
+real	0m1.510s
+user	0m1.355s
+sys	0m0.149s
+
+real	0m3.459s
+user	0m3.014s
+sys	0m0.406s
+
+real	0m1.398s
+user	0m1.111s
+sys	0m0.268s
+
+real	0m1.247s
+user	0m1.100s
+sys	0m0.140s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1308
+[skip] CsI_Calo_260610_1309  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1309)
+[skip] CsI_Calo_260610_1351  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1351)
+[skip] CsI_Calo_260610_1532  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1532)
+[skip] CsI_Calo_260610_1533  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1533)
+[skip] CsI_Calo_260610_1911  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1911)
+[skip] CsI_Calo_260610_1921  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1921)
+[skip] CsI_Calo_260610_1946  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_1946)
+[skip] CsI_Calo_260610_2030  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2030)
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2147.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2147
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2147.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2147
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.581s
+user	0m0.429s
+sys	0m0.137s
+
+real	0m1.113s
+user	0m0.896s
+sys	0m0.192s
+
+real	0m0.678s
+user	0m0.484s
+sys	0m0.183s
+
+real	0m4.829s
+user	0m4.228s
+sys	0m0.547s
+
+real	1m35.274s
+user	1m27.759s
+sys	0m7.152s
+
+real	0m2.071s
+user	0m1.746s
+sys	0m0.312s
+======== ped ========
+
+real	0m0.394s
+user	0m0.243s
+sys	0m0.135s
+
+real	0m0.953s
+user	0m0.739s
+sys	0m0.196s
+
+real	0m0.636s
+user	0m0.460s
+sys	0m0.170s
+
+real	0m5.293s
+user	0m4.590s
+sys	0m0.645s
+
+real	0m4.798s
+user	0m4.497s
+sys	0m0.159s
+
+real	0m1.613s
+user	0m1.305s
+sys	0m0.297s
+======== amp ========
+
+real	0m0.419s
+user	0m0.255s
+sys	0m0.153s
+
+real	0m0.624s
+user	0m0.453s
+sys	0m0.168s
+
+real	0m3.965s
+user	0m3.522s
+sys	0m0.402s
+
+real	0m1.321s
+user	0m1.083s
+sys	0m0.220s
+
+real	0m1.367s
+user	0m1.238s
+sys	0m0.124s
+
+real	0m3.773s
+user	0m3.289s
+sys	0m0.448s
+
+real	0m1.258s
+user	0m0.990s
+sys	0m0.252s
+
+real	0m1.228s
+user	0m1.099s
+sys	0m0.124s
+======== wave ========
+
+real	0m0.399s
+user	0m0.261s
+sys	0m0.125s
+
+real	0m0.609s
+user	0m0.436s
+sys	0m0.171s
+
+real	0m4.475s
+user	0m3.919s
+sys	0m0.485s
+
+real	0m1.483s
+user	0m1.235s
+sys	0m0.229s
+
+real	0m1.408s
+user	0m1.270s
+sys	0m0.133s
+
+real	0m3.522s
+user	0m3.012s
+sys	0m0.478s
+
+real	0m1.539s
+user	0m1.227s
+sys	0m0.297s
+
+real	0m1.262s
+user	0m1.109s
+sys	0m0.148s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2147
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2219.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2219
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2219.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2219
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.464s
+user	0m0.335s
+sys	0m0.116s
+
+real	0m0.774s
+user	0m0.615s
+sys	0m0.140s
+
+real	0m0.658s
+user	0m0.469s
+sys	0m0.178s
+
+real	0m4.721s
+user	0m4.150s
+sys	0m0.527s
+
+real	1m9.192s
+user	1m3.832s
+sys	0m5.136s
+
+real	0m1.684s
+user	0m1.421s
+sys	0m0.255s
+======== ped ========
+
+real	0m0.367s
+user	0m0.237s
+sys	0m0.118s
+
+real	0m0.945s
+user	0m0.731s
+sys	0m0.187s
+
+real	0m0.616s
+user	0m0.441s
+sys	0m0.168s
+
+real	0m4.728s
+user	0m4.224s
+sys	0m0.457s
+
+real	0m4.335s
+user	0m4.118s
+sys	0m0.175s
+
+real	0m1.377s
+user	0m1.114s
+sys	0m0.254s
+======== amp ========
+
+real	0m0.370s
+user	0m0.248s
+sys	0m0.109s
+
+real	0m0.606s
+user	0m0.434s
+sys	0m0.170s
+
+real	0m3.709s
+user	0m3.305s
+sys	0m0.371s
+
+real	0m1.167s
+user	0m0.961s
+sys	0m0.191s
+
+real	0m1.419s
+user	0m1.288s
+sys	0m0.125s
+
+real	0m3.393s
+user	0m2.963s
+sys	0m0.401s
+
+real	0m1.575s
+user	0m1.286s
+sys	0m0.272s
+
+real	0m1.216s
+user	0m1.070s
+sys	0m0.142s
+======== wave ========
+
+real	0m0.382s
+user	0m0.236s
+sys	0m0.124s
+
+real	0m0.620s
+user	0m0.443s
+sys	0m0.174s
+
+real	0m4.018s
+user	0m3.496s
+sys	0m0.484s
+
+real	0m1.546s
+user	0m1.279s
+sys	0m0.248s
+
+real	0m1.411s
+user	0m1.257s
+sys	0m0.146s
+
+real	0m3.481s
+user	0m3.014s
+sys	0m0.381s
+
+real	0m1.302s
+user	0m1.013s
+sys	0m0.247s
+
+real	0m1.226s
+user	0m1.071s
+sys	0m0.152s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2219
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2244.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2244
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2244.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2244
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.739s
+user	0m0.557s
+sys	0m0.162s
+
+real	0m1.226s
+user	0m0.908s
+sys	0m0.210s
+
+real	0m0.697s
+user	0m0.506s
+sys	0m0.178s
+
+real	0m4.663s
+user	0m4.078s
+sys	0m0.510s
+
+real	1m55.458s
+user	1m46.401s
+sys	0m8.479s
+
+real	0m1.714s
+user	0m1.483s
+sys	0m0.221s
+======== ped ========
+
+real	0m0.558s
+user	0m0.246s
+sys	0m0.157s
+
+real	0m1.012s
+user	0m0.763s
+sys	0m0.183s
+
+real	0m0.634s
+user	0m0.453s
+sys	0m0.175s
+
+real	0m4.739s
+user	0m4.049s
+sys	0m0.638s
+
+real	0m5.716s
+user	0m5.048s
+sys	0m0.166s
+
+real	0m1.355s
+user	0m1.090s
+sys	0m0.257s
+======== amp ========
+
+real	0m0.465s
+user	0m0.258s
+sys	0m0.137s
+
+real	0m0.621s
+user	0m0.453s
+sys	0m0.165s
+
+real	0m3.872s
+user	0m3.388s
+sys	0m0.411s
+
+real	0m1.488s
+user	0m1.232s
+sys	0m0.227s
+
+real	0m1.379s
+user	0m1.219s
+sys	0m0.155s
+
+real	0m4.082s
+user	0m3.500s
+sys	0m0.489s
+
+real	0m1.333s
+user	0m1.063s
+sys	0m0.256s
+
+real	0m1.245s
+user	0m1.074s
+sys	0m0.166s
+======== wave ========
+
+real	0m0.429s
+user	0m0.263s
+sys	0m0.150s
+
+real	0m0.618s
+user	0m0.452s
+sys	0m0.163s
+
+real	0m4.279s
+user	0m3.651s
+sys	0m0.475s
+
+real	0m1.298s
+user	0m1.058s
+sys	0m0.223s
+
+real	0m1.438s
+user	0m1.293s
+sys	0m0.140s
+
+real	0m3.981s
+user	0m3.488s
+sys	0m0.409s
+
+real	0m1.246s
+user	0m1.007s
+sys	0m0.224s
+
+real	0m1.260s
+user	0m1.095s
+sys	0m0.160s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2244
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2321.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2321
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2321.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2321
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.526s
+user	0m0.327s
+sys	0m0.138s
+
+real	0m0.904s
+user	0m0.699s
+sys	0m0.150s
+
+real	0m0.670s
+user	0m0.475s
+sys	0m0.183s
+
+real	0m4.484s
+user	0m3.945s
+sys	0m0.486s
+
+real	1m8.438s
+user	1m3.188s
+sys	0m4.962s
+
+real	0m1.975s
+user	0m1.681s
+sys	0m0.285s
+======== ped ========
+
+real	0m0.415s
+user	0m0.246s
+sys	0m0.115s
+
+real	0m0.819s
+user	0m0.633s
+sys	0m0.169s
+
+real	0m0.603s
+user	0m0.425s
+sys	0m0.171s
+
+real	0m4.458s
+user	0m3.884s
+sys	0m0.486s
+
+real	0m4.690s
+user	0m4.453s
+sys	0m0.182s
+
+real	0m1.582s
+user	0m1.302s
+sys	0m0.273s
+======== amp ========
+
+real	0m0.373s
+user	0m0.236s
+sys	0m0.120s
+
+real	0m0.634s
+user	0m0.446s
+sys	0m0.185s
+
+real	0m4.002s
+user	0m3.535s
+sys	0m0.413s
+
+real	0m1.272s
+user	0m1.055s
+sys	0m0.195s
+
+real	0m1.394s
+user	0m1.236s
+sys	0m0.153s
+
+real	0m4.168s
+user	0m3.617s
+sys	0m0.507s
+
+real	0m1.201s
+user	0m0.984s
+sys	0m0.199s
+
+real	0m1.240s
+user	0m1.083s
+sys	0m0.153s
+======== wave ========
+
+real	0m0.378s
+user	0m0.252s
+sys	0m0.110s
+
+real	0m0.583s
+user	0m0.407s
+sys	0m0.174s
+
+real	0m4.550s
+user	0m3.979s
+sys	0m0.487s
+
+real	0m1.537s
+user	0m1.235s
+sys	0m0.276s
+
+real	0m1.452s
+user	0m1.297s
+sys	0m0.151s
+
+real	0m3.487s
+user	0m3.055s
+sys	0m0.399s
+
+real	0m1.237s
+user	0m0.986s
+sys	0m0.236s
+
+real	0m1.228s
+user	0m1.074s
+sys	0m0.150s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2321
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2341.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2341
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260610_2341.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2341
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.532s
+user	0m0.384s
+sys	0m0.127s
+
+real	0m1.016s
+user	0m0.794s
+sys	0m0.187s
+
+real	0m0.671s
+user	0m0.501s
+sys	0m0.159s
+
+real	0m4.974s
+user	0m4.346s
+sys	0m0.557s
+
+real	1m29.990s
+user	1m22.667s
+sys	0m7.018s
+
+real	0m1.687s
+user	0m1.443s
+sys	0m0.236s
+======== ped ========
+
+real	0m0.379s
+user	0m0.231s
+sys	0m0.131s
+
+real	0m0.834s
+user	0m0.649s
+sys	0m0.168s
+
+real	0m0.582s
+user	0m0.418s
+sys	0m0.158s
+
+real	0m4.174s
+user	0m3.683s
+sys	0m0.436s
+
+real	0m4.604s
+user	0m4.395s
+sys	0m0.167s
+
+real	0m1.657s
+user	0m1.345s
+sys	0m0.303s
+======== amp ========
+
+real	0m0.369s
+user	0m0.240s
+sys	0m0.116s
+
+real	0m0.603s
+user	0m0.451s
+sys	0m0.149s
+
+real	0m3.900s
+user	0m3.433s
+sys	0m0.392s
+
+real	0m1.526s
+user	0m1.260s
+sys	0m0.246s
+
+real	0m1.364s
+user	0m1.202s
+sys	0m0.158s
+
+real	0m3.463s
+user	0m3.041s
+sys	0m0.390s
+
+real	0m1.172s
+user	0m0.911s
+sys	0m0.245s
+
+real	0m1.191s
+user	0m1.045s
+sys	0m0.142s
+======== wave ========
+
+real	0m0.379s
+user	0m0.240s
+sys	0m0.126s
+
+real	0m0.569s
+user	0m0.422s
+sys	0m0.145s
+
+real	0m3.706s
+user	0m3.295s
+sys	0m0.378s
+
+real	0m1.417s
+user	0m1.171s
+sys	0m0.232s
+
+real	0m1.367s
+user	0m1.232s
+sys	0m0.130s
+
+real	0m3.602s
+user	0m3.142s
+sys	0m0.430s
+
+real	0m1.268s
+user	0m1.002s
+sys	0m0.245s
+
+real	0m1.235s
+user	0m1.089s
+sys	0m0.141s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_2341
+[skip] CsI_Calo_260610_260611_all  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260610_260611_all)
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0002.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0002
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0002.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0002
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.468s
+user	0m0.342s
+sys	0m0.112s
+
+real	0m1.062s
+user	0m0.835s
+sys	0m0.197s
+
+real	0m0.653s
+user	0m0.467s
+sys	0m0.173s
+
+real	0m5.051s
+user	0m4.426s
+sys	0m0.571s
+
+real	1m10.608s
+user	1m4.947s
+sys	0m5.369s
+
+real	0m1.718s
+user	0m1.434s
+sys	0m0.276s
+======== ped ========
+
+real	0m0.424s
+user	0m0.260s
+sys	0m0.110s
+
+real	0m0.837s
+user	0m0.633s
+sys	0m0.158s
+
+real	0m0.624s
+user	0m0.456s
+sys	0m0.161s
+
+real	0m4.641s
+user	0m4.045s
+sys	0m0.549s
+
+real	0m4.453s
+user	0m4.260s
+sys	0m0.179s
+
+real	0m1.478s
+user	0m1.204s
+sys	0m0.264s
+======== amp ========
+
+real	0m0.364s
+user	0m0.240s
+sys	0m0.112s
+
+real	0m0.609s
+user	0m0.452s
+sys	0m0.155s
+
+real	0m4.254s
+user	0m3.726s
+sys	0m0.487s
+
+real	0m1.169s
+user	0m0.966s
+sys	0m0.190s
+
+real	0m1.367s
+user	0m1.228s
+sys	0m0.134s
+
+real	0m3.314s
+user	0m2.898s
+sys	0m0.385s
+
+real	0m1.271s
+user	0m1.031s
+sys	0m0.223s
+
+real	0m1.232s
+user	0m1.088s
+sys	0m0.139s
+======== wave ========
+
+real	0m0.377s
+user	0m0.237s
+sys	0m0.111s
+
+real	0m0.616s
+user	0m0.452s
+sys	0m0.161s
+
+real	0m4.017s
+user	0m3.550s
+sys	0m0.430s
+
+real	0m1.280s
+user	0m1.064s
+sys	0m0.200s
+
+real	0m1.516s
+user	0m1.352s
+sys	0m0.157s
+
+real	0m3.434s
+user	0m3.011s
+sys	0m0.393s
+
+real	0m1.521s
+user	0m1.223s
+sys	0m0.280s
+
+real	0m1.130s
+user	0m0.983s
+sys	0m0.143s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0002
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0038.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0038
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0038.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0038
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.425s
+user	0m0.290s
+sys	0m0.122s
+
+real	0m0.701s
+user	0m0.535s
+sys	0m0.143s
+
+real	0m0.661s
+user	0m0.494s
+sys	0m0.156s
+
+real	0m4.964s
+user	0m4.287s
+sys	0m0.630s
+
+real	0m42.474s
+user	0m39.265s
+sys	0m3.091s
+
+real	0m1.497s
+user	0m1.231s
+sys	0m0.258s
+======== ped ========
+
+real	0m0.346s
+user	0m0.237s
+sys	0m0.100s
+
+real	0m0.935s
+user	0m0.726s
+sys	0m0.193s
+
+real	0m0.619s
+user	0m0.435s
+sys	0m0.176s
+
+real	0m4.329s
+user	0m3.793s
+sys	0m0.466s
+
+real	0m4.782s
+user	0m4.309s
+sys	0m0.175s
+
+real	0m1.485s
+user	0m1.190s
+sys	0m0.286s
+======== amp ========
+
+real	0m0.340s
+user	0m0.243s
+sys	0m0.082s
+
+real	0m0.597s
+user	0m0.439s
+sys	0m0.156s
+
+real	0m4.248s
+user	0m3.746s
+sys	0m0.459s
+
+real	0m1.383s
+user	0m1.159s
+sys	0m0.203s
+
+real	0m1.440s
+user	0m1.296s
+sys	0m0.140s
+
+real	0m3.457s
+user	0m3.060s
+sys	0m0.364s
+
+real	0m1.250s
+user	0m1.021s
+sys	0m0.211s
+
+real	0m1.234s
+user	0m1.083s
+sys	0m0.146s
+======== wave ========
+
+real	0m0.357s
+user	0m0.249s
+sys	0m0.090s
+
+real	0m0.623s
+user	0m0.442s
+sys	0m0.179s
+
+real	0m3.970s
+user	0m3.446s
+sys	0m0.463s
+
+real	0m1.455s
+user	0m1.227s
+sys	0m0.213s
+
+real	0m1.485s
+user	0m1.323s
+sys	0m0.157s
+
+real	0m3.586s
+user	0m3.088s
+sys	0m0.455s
+
+real	0m1.273s
+user	0m1.028s
+sys	0m0.228s
+
+real	0m1.227s
+user	0m1.084s
+sys	0m0.138s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0038
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0046.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0046
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0046.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0046
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.509s
+user	0m0.370s
+sys	0m0.123s
+
+real	0m0.897s
+user	0m0.710s
+sys	0m0.169s
+
+real	0m0.666s
+user	0m0.491s
+sys	0m0.163s
+
+real	0m4.578s
+user	0m4.038s
+sys	0m0.501s
+
+real	1m5.445s
+user	1m0.320s
+sys	0m4.902s
+
+real	0m1.716s
+user	0m1.461s
+sys	0m0.248s
+======== ped ========
+
+real	0m0.347s
+user	0m0.226s
+sys	0m0.106s
+
+real	0m0.822s
+user	0m0.643s
+sys	0m0.160s
+
+real	0m0.589s
+user	0m0.415s
+sys	0m0.168s
+
+real	0m4.469s
+user	0m3.904s
+sys	0m0.509s
+
+real	0m4.859s
+user	0m4.654s
+sys	0m0.175s
+
+real	0m1.433s
+user	0m1.150s
+sys	0m0.274s
+======== amp ========
+
+real	0m0.364s
+user	0m0.220s
+sys	0m0.128s
+
+real	0m0.609s
+user	0m0.437s
+sys	0m0.169s
+
+real	0m3.919s
+user	0m3.451s
+sys	0m0.396s
+
+real	0m1.183s
+user	0m0.975s
+sys	0m0.194s
+
+real	0m1.414s
+user	0m1.273s
+sys	0m0.137s
+
+real	0m3.524s
+user	0m3.089s
+sys	0m0.374s
+
+real	0m1.171s
+user	0m0.933s
+sys	0m0.217s
+
+real	0m1.113s
+user	0m0.972s
+sys	0m0.137s
+======== wave ========
+
+real	0m0.371s
+user	0m0.250s
+sys	0m0.103s
+
+real	0m0.613s
+user	0m0.453s
+sys	0m0.158s
+
+real	0m4.069s
+user	0m3.611s
+sys	0m0.422s
+
+real	0m1.381s
+user	0m1.141s
+sys	0m0.216s
+
+real	0m1.476s
+user	0m1.330s
+sys	0m0.141s
+
+real	0m3.432s
+user	0m2.998s
+sys	0m0.372s
+
+real	0m1.447s
+user	0m1.154s
+sys	0m0.278s
+
+real	0m1.223s
+user	0m1.067s
+sys	0m0.151s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0046
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0113.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0113
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0113.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0113
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.688s
+user	0m0.501s
+sys	0m0.171s
+
+real	0m1.071s
+user	0m0.844s
+sys	0m0.207s
+
+real	0m0.687s
+user	0m0.485s
+sys	0m0.190s
+
+real	0m4.838s
+user	0m4.211s
+sys	0m0.583s
+
+real	1m47.735s
+user	1m39.134s
+sys	0m8.241s
+
+real	0m1.708s
+user	0m1.481s
+sys	0m0.220s
+======== ped ========
+
+real	0m0.413s
+user	0m0.265s
+sys	0m0.136s
+
+real	0m0.868s
+user	0m0.672s
+sys	0m0.183s
+
+real	0m0.606s
+user	0m0.432s
+sys	0m0.168s
+
+real	0m4.257s
+user	0m3.766s
+sys	0m0.447s
+
+real	0m4.536s
+user	0m4.353s
+sys	0m0.163s
+
+real	0m1.182s
+user	0m0.932s
+sys	0m0.245s
+======== amp ========
+
+real	0m0.423s
+user	0m0.256s
+sys	0m0.138s
+
+real	0m0.610s
+user	0m0.442s
+sys	0m0.165s
+
+real	0m3.973s
+user	0m3.466s
+sys	0m0.450s
+
+real	0m1.392s
+user	0m1.142s
+sys	0m0.237s
+
+real	0m1.548s
+user	0m1.371s
+sys	0m0.172s
+
+real	0m3.520s
+user	0m3.038s
+sys	0m0.383s
+
+real	0m1.408s
+user	0m1.085s
+sys	0m0.264s
+
+real	0m1.202s
+user	0m1.041s
+sys	0m0.158s
+======== wave ========
+
+real	0m0.425s
+user	0m0.256s
+sys	0m0.153s
+
+real	0m0.643s
+user	0m0.480s
+sys	0m0.160s
+
+real	0m4.012s
+user	0m3.527s
+sys	0m0.417s
+
+real	0m1.429s
+user	0m1.151s
+sys	0m0.208s
+
+real	0m1.370s
+user	0m1.223s
+sys	0m0.143s
+
+real	0m3.373s
+user	0m2.978s
+sys	0m0.369s
+
+real	0m1.267s
+user	0m1.025s
+sys	0m0.214s
+
+real	0m1.218s
+user	0m1.091s
+sys	0m0.122s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0113
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0146.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0146
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0146.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0146
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.696s
+user	0m0.463s
+sys	0m0.139s
+
+real	0m1.329s
+user	0m0.899s
+sys	0m0.219s
+
+real	0m0.687s
+user	0m0.505s
+sys	0m0.171s
+
+real	0m4.746s
+user	0m4.034s
+sys	0m0.576s
+
+real	1m44.934s
+user	1m36.276s
+sys	0m7.838s
+
+real	0m1.800s
+user	0m1.537s
+sys	0m0.254s
+======== ped ========
+
+real	0m0.403s
+user	0m0.252s
+sys	0m0.128s
+
+real	0m0.920s
+user	0m0.706s
+sys	0m0.195s
+
+real	0m0.623s
+user	0m0.454s
+sys	0m0.164s
+
+real	0m4.804s
+user	0m4.191s
+sys	0m0.540s
+
+real	0m4.454s
+user	0m4.266s
+sys	0m0.148s
+
+real	0m1.264s
+user	0m1.040s
+sys	0m0.219s
+======== amp ========
+
+real	0m0.393s
+user	0m0.238s
+sys	0m0.143s
+
+real	0m0.609s
+user	0m0.439s
+sys	0m0.168s
+
+real	0m3.976s
+user	0m3.500s
+sys	0m0.431s
+
+real	0m1.418s
+user	0m1.169s
+sys	0m0.223s
+
+real	0m1.499s
+user	0m1.352s
+sys	0m0.142s
+
+real	0m3.577s
+user	0m3.094s
+sys	0m0.450s
+
+real	0m1.303s
+user	0m1.038s
+sys	0m0.251s
+
+real	0m1.225s
+user	0m1.073s
+sys	0m0.148s
+======== wave ========
+
+real	0m0.429s
+user	0m0.276s
+sys	0m0.141s
+
+real	0m0.607s
+user	0m0.435s
+sys	0m0.170s
+
+real	0m3.722s
+user	0m3.267s
+sys	0m0.393s
+
+real	0m1.366s
+user	0m1.140s
+sys	0m0.211s
+
+real	0m1.512s
+user	0m1.331s
+sys	0m0.176s
+
+real	0m3.478s
+user	0m3.017s
+sys	0m0.433s
+
+real	0m1.239s
+user	0m0.988s
+sys	0m0.226s
+
+real	0m1.178s
+user	0m1.040s
+sys	0m0.133s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0146
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0248.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0248
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0248.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0248
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.459s
+user	0m0.326s
+sys	0m0.119s
+
+real	0m1.016s
+user	0m0.816s
+sys	0m0.181s
+
+real	0m0.646s
+user	0m0.463s
+sys	0m0.171s
+
+real	0m4.299s
+user	0m3.756s
+sys	0m0.475s
+
+real	1m1.450s
+user	0m56.782s
+sys	0m4.472s
+
+real	0m1.455s
+user	0m1.228s
+sys	0m0.219s
+======== ped ========
+
+real	0m0.343s
+user	0m0.218s
+sys	0m0.112s
+
+real	0m0.914s
+user	0m0.706s
+sys	0m0.189s
+
+real	0m0.635s
+user	0m0.462s
+sys	0m0.166s
+
+real	0m4.580s
+user	0m3.981s
+sys	0m0.554s
+
+real	0m4.761s
+user	0m4.531s
+sys	0m0.182s
+
+real	0m1.619s
+user	0m1.314s
+sys	0m0.296s
+======== amp ========
+
+real	0m0.359s
+user	0m0.238s
+sys	0m0.108s
+
+real	0m0.611s
+user	0m0.437s
+sys	0m0.172s
+
+real	0m3.830s
+user	0m3.373s
+sys	0m0.410s
+
+real	0m1.434s
+user	0m1.197s
+sys	0m0.222s
+
+real	0m1.498s
+user	0m1.339s
+sys	0m0.154s
+
+real	0m3.738s
+user	0m3.279s
+sys	0m0.409s
+
+real	0m1.285s
+user	0m1.022s
+sys	0m0.229s
+
+real	0m1.238s
+user	0m1.096s
+sys	0m0.138s
+======== wave ========
+
+real	0m0.395s
+user	0m0.240s
+sys	0m0.108s
+
+real	0m0.600s
+user	0m0.441s
+sys	0m0.156s
+
+real	0m4.019s
+user	0m3.529s
+sys	0m0.431s
+
+real	0m1.480s
+user	0m1.204s
+sys	0m0.257s
+
+real	0m1.381s
+user	0m1.235s
+sys	0m0.142s
+
+real	0m3.589s
+user	0m3.112s
+sys	0m0.417s
+
+real	0m1.398s
+user	0m1.117s
+sys	0m0.266s
+
+real	0m1.257s
+user	0m1.084s
+sys	0m0.168s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0248
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0903.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0903
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_0903.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0903
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m0.949s
+user	0m0.728s
+sys	0m0.204s
+
+real	0m1.206s
+user	0m0.999s
+sys	0m0.186s
+
+real	0m0.783s
+user	0m0.601s
+sys	0m0.169s
+
+real	0m4.787s
+user	0m4.150s
+sys	0m0.572s
+
+real	2m2.494s
+user	1m52.391s
+sys	0m9.257s
+
+real	0m1.959s
+user	0m1.695s
+sys	0m0.256s
+======== ped ========
+
+real	0m0.629s
+user	0m0.262s
+sys	0m0.230s
+
+real	0m0.840s
+user	0m0.657s
+sys	0m0.169s
+
+real	0m0.634s
+user	0m0.455s
+sys	0m0.172s
+
+real	0m4.417s
+user	0m3.907s
+sys	0m0.445s
+
+real	0m4.838s
+user	0m4.593s
+sys	0m0.177s
+
+real	0m1.312s
+user	0m1.061s
+sys	0m0.244s
+======== amp ========
+
+real	0m0.498s
+user	0m0.284s
+sys	0m0.202s
+
+real	0m0.565s
+user	0m0.411s
+sys	0m0.152s
+
+real	0m3.851s
+user	0m3.349s
+sys	0m0.421s
+
+real	0m1.262s
+user	0m1.037s
+sys	0m0.206s
+
+real	0m1.447s
+user	0m1.303s
+sys	0m0.139s
+
+real	0m3.735s
+user	0m3.182s
+sys	0m0.493s
+
+real	0m1.211s
+user	0m0.971s
+sys	0m0.227s
+
+real	0m1.232s
+user	0m1.086s
+sys	0m0.142s
+======== wave ========
+
+real	0m0.503s
+user	0m0.274s
+sys	0m0.217s
+
+real	0m0.618s
+user	0m0.436s
+sys	0m0.179s
+
+real	0m3.740s
+user	0m3.290s
+sys	0m0.416s
+
+real	0m1.229s
+user	0m1.004s
+sys	0m0.192s
+
+real	0m1.460s
+user	0m1.319s
+sys	0m0.136s
+
+real	0m3.365s
+user	0m2.947s
+sys	0m0.383s
+
+real	0m1.219s
+user	0m0.986s
+sys	0m0.199s
+
+real	0m1.234s
+user	0m1.085s
+sys	0m0.144s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_0903
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_1012.pkg
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_1012
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/CsI_Calo_260611_1012.pkg
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_1012
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m1.753s
+user	0m1.396s
+sys	0m0.341s
+
+real	0m1.973s
+user	0m1.711s
+sys	0m0.209s
+
+real	0m0.934s
+user	0m0.755s
+sys	0m0.166s
+
+real	0m5.312s
+user	0m4.593s
+sys	0m0.675s
+
+real	1m50.884s
+user	1m42.102s
+sys	0m8.481s
+
+real	0m2.262s
+user	0m2.008s
+sys	0m0.245s
+======== ped ========
+
+real	0m0.742s
+user	0m0.329s
+sys	0m0.402s
+
+real	0m0.952s
+user	0m0.761s
+sys	0m0.170s
+
+real	0m0.653s
+user	0m0.461s
+sys	0m0.185s
+
+real	0m4.831s
+user	0m4.167s
+sys	0m0.584s
+
+real	0m5.182s
+user	0m4.801s
+sys	0m0.165s
+
+real	0m1.588s
+user	0m1.299s
+sys	0m0.281s
+======== amp ========
+
+real	0m0.721s
+user	0m0.318s
+sys	0m0.356s
+
+real	0m0.623s
+user	0m0.454s
+sys	0m0.167s
+
+real	0m3.934s
+user	0m3.448s
+sys	0m0.423s
+
+real	0m1.342s
+user	0m1.115s
+sys	0m0.219s
+
+real	0m1.504s
+user	0m1.354s
+sys	0m0.145s
+
+real	0m3.665s
+user	0m3.240s
+sys	0m0.394s
+
+real	0m1.271s
+user	0m1.013s
+sys	0m0.238s
+
+real	0m1.213s
+user	0m1.054s
+sys	0m0.155s
+======== wave ========
+
+real	0m0.621s
+user	0m0.290s
+sys	0m0.313s
+
+real	0m0.610s
+user	0m0.454s
+sys	0m0.154s
+
+real	0m3.822s
+user	0m3.347s
+sys	0m0.406s
+
+real	0m1.581s
+user	0m1.303s
+sys	0m0.264s
+
+real	0m1.425s
+user	0m1.261s
+sys	0m0.159s
+
+real	0m3.440s
+user	0m2.991s
+sys	0m0.423s
+
+real	0m1.206s
+user	0m0.968s
+sys	0m0.225s
+
+real	0m1.216s
+user	0m1.069s
+sys	0m0.143s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260611_1012
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260525.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260525
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260525.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260525.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m4.462s
+user	0m3.016s
+sys	0m1.272s
+
+real	0m3.383s
+user	0m2.986s
+sys	0m0.273s
+
+real	0m1.326s
+user	0m1.108s
+sys	0m0.197s
+
+real	0m11.285s
+user	0m8.946s
+sys	0m2.228s
+
+real	1m57.921s
+user	1m48.245s
+sys	0m8.967s
+
+real	0m3.918s
+user	0m3.618s
+sys	0m0.282s
+======== ped ========
+
+real	0m2.173s
+user	0m0.989s
+sys	0m1.065s
+
+real	0m1.254s
+user	0m1.035s
+sys	0m0.194s
+
+real	0m0.719s
+user	0m0.522s
+sys	0m0.185s
+
+real	0m5.780s
+user	0m4.834s
+sys	0m0.814s
+
+real	0m6.546s
+user	0m6.006s
+sys	0m0.174s
+
+real	0m1.573s
+user	0m1.321s
+sys	0m0.245s
+======== amp ========
+
+real	0m1.502s
+user	0m0.497s
+sys	0m0.917s
+
+real	0m0.645s
+user	0m0.465s
+sys	0m0.177s
+
+real	0m4.384s
+user	0m3.965s
+sys	0m0.382s
+
+real	0m1.195s
+user	0m0.988s
+sys	0m0.195s
+
+real	0m1.432s
+user	0m1.272s
+sys	0m0.156s
+
+real	0m3.445s
+user	0m2.999s
+sys	0m0.391s
+
+real	0m1.169s
+user	0m0.968s
+sys	0m0.188s
+
+real	0m1.214s
+user	0m1.050s
+sys	0m0.160s
+======== wave ========
+
+real	0m1.510s
+user	0m0.497s
+sys	0m0.973s
+
+real	0m0.612s
+user	0m0.440s
+sys	0m0.169s
+
+real	0m4.080s
+user	0m3.660s
+sys	0m0.385s
+
+real	0m1.175s
+user	0m0.971s
+sys	0m0.187s
+
+real	0m1.353s
+user	0m1.216s
+sys	0m0.133s
+
+real	0m3.513s
+user	0m2.999s
+sys	0m0.399s
+
+real	0m1.395s
+user	0m1.090s
+sys	0m0.227s
+
+real	0m1.202s
+user	0m1.047s
+sys	0m0.151s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260525.dat
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260526_2017.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2017
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260526_2017.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2017.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m4.618s
+user	0m3.256s
+sys	0m1.201s
+
+real	0m3.051s
+user	0m2.727s
+sys	0m0.258s
+
+real	0m1.112s
+user	0m0.905s
+sys	0m0.185s
+
+real	0m8.861s
+user	0m7.223s
+sys	0m1.569s
+
+real	1m47.221s
+user	1m38.245s
+sys	0m8.027s
+
+real	0m3.794s
+user	0m3.454s
+sys	0m0.326s
+======== ped ========
+
+real	0m1.694s
+user	0m0.517s
+sys	0m1.161s
+
+real	0m0.903s
+user	0m0.689s
+sys	0m0.200s
+
+real	0m0.620s
+user	0m0.435s
+sys	0m0.179s
+
+real	0m4.183s
+user	0m3.692s
+sys	0m0.454s
+
+real	0m5.113s
+user	0m4.920s
+sys	0m0.174s
+
+real	0m1.261s
+user	0m1.004s
+sys	0m0.252s
+======== amp ========
+
+real	0m2.010s
+user	0m1.073s
+sys	0m0.911s
+
+real	0m0.472s
+user	0m0.338s
+sys	0m0.133s
+
+real	0m8.565s
+user	0m6.823s
+sys	0m1.675s
+
+real	0m3.518s
+user	0m3.281s
+sys	0m0.206s
+
+real	0m3.653s
+user	0m3.480s
+sys	0m0.163s
+
+real	0m3.276s
+user	0m2.816s
+sys	0m0.400s
+
+real	0m1.421s
+user	0m1.144s
+sys	0m0.262s
+
+real	0m1.315s
+user	0m1.174s
+sys	0m0.136s
+======== wave ========
+
+real	0m1.375s
+user	0m0.515s
+sys	0m0.837s
+
+real	0m0.620s
+user	0m0.456s
+sys	0m0.163s
+
+real	0m3.855s
+user	0m3.423s
+sys	0m0.403s
+
+real	0m1.359s
+user	0m1.109s
+sys	0m0.237s
+
+real	0m1.491s
+user	0m1.337s
+sys	0m0.149s
+
+real	0m3.648s
+user	0m3.170s
+sys	0m0.441s
+
+real	0m1.523s
+user	0m1.218s
+sys	0m0.290s
+
+real	0m1.222s
+user	0m1.070s
+sys	0m0.148s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2017.dat
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260526_2105.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2105
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260526_2105.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2105.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m1.554s
+user	0m0.375s
+sys	0m0.684s
+
+real	0m0.847s
+user	0m0.660s
+sys	0m0.173s
+
+real	0m0.622s
+user	0m0.444s
+sys	0m0.171s
+
+real	0m4.237s
+user	0m3.731s
+sys	0m0.466s
+
+real	0m4.735s
+user	0m4.519s
+sys	0m0.175s
+
+real	0m1.275s
+user	0m1.027s
+sys	0m0.242s
+======== ped ========
+
+real	0m0.856s
+user	0m0.339s
+sys	0m0.498s
+
+real	0m0.791s
+user	0m0.617s
+sys	0m0.160s
+
+real	0m0.619s
+user	0m0.452s
+sys	0m0.161s
+
+real	0m4.276s
+user	0m3.770s
+sys	0m0.437s
+
+real	0m5.395s
+user	0m5.147s
+sys	0m0.187s
+
+real	0m1.494s
+user	0m1.221s
+sys	0m0.265s
+======== amp ========
+
+real	0m1.009s
+user	0m0.536s
+sys	0m0.458s
+
+real	0m0.463s
+user	0m0.324s
+sys	0m0.137s
+
+real	0m5.015s
+user	0m4.262s
+sys	0m0.712s
+
+real	0m3.415s
+user	0m3.165s
+sys	0m0.231s
+
+real	0m3.497s
+user	0m3.331s
+sys	0m0.149s
+
+real	0m3.062s
+user	0m2.686s
+sys	0m0.347s
+
+real	0m1.341s
+user	0m1.054s
+sys	0m0.270s
+
+real	0m1.348s
+user	0m1.186s
+sys	0m0.157s
+======== wave ========
+
+real	0m1.941s
+user	0m1.450s
+sys	0m0.462s
+
+real	0m0.664s
+user	0m0.496s
+sys	0m0.166s
+
+real	0m8.041s
+user	0m6.400s
+sys	0m1.574s
+
+real	0m3.130s
+user	0m2.898s
+sys	0m0.217s
+
+real	0m3.532s
+user	0m3.348s
+sys	0m0.168s
+
+real	0m3.393s
+user	0m2.955s
+sys	0m0.407s
+
+real	0m1.357s
+user	0m1.097s
+sys	0m0.245s
+
+real	0m1.326s
+user	0m1.173s
+sys	0m0.148s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2105.dat
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260526_2245.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2245
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260526_2245.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2245.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m1.963s
+user	0m1.150s
+sys	0m0.672s
+
+real	0m1.545s
+user	0m1.318s
+sys	0m0.202s
+
+real	0m0.836s
+user	0m0.664s
+sys	0m0.158s
+
+real	0m6.226s
+user	0m5.342s
+sys	0m0.803s
+
+real	1m52.841s
+user	1m43.954s
+sys	0m8.501s
+
+real	0m2.153s
+user	0m1.894s
+sys	0m0.250s
+======== ped ========
+
+real	0m1.105s
+user	0m0.662s
+sys	0m0.396s
+
+real	0m1.356s
+user	0m1.095s
+sys	0m0.204s
+
+real	0m0.780s
+user	0m0.611s
+sys	0m0.156s
+
+real	0m6.244s
+user	0m5.221s
+sys	0m0.939s
+
+real	0m4.940s
+user	0m4.707s
+sys	0m0.185s
+
+real	0m1.621s
+user	0m1.383s
+sys	0m0.231s
+======== amp ========
+
+real	0m0.974s
+user	0m0.396s
+sys	0m0.565s
+
+real	0m0.614s
+user	0m0.447s
+sys	0m0.164s
+
+real	0m3.771s
+user	0m3.330s
+sys	0m0.378s
+
+real	0m1.611s
+user	0m1.322s
+sys	0m0.273s
+
+real	0m1.365s
+user	0m1.224s
+sys	0m0.137s
+
+real	0m3.255s
+user	0m2.805s
+sys	0m0.396s
+
+real	0m1.217s
+user	0m0.978s
+sys	0m0.220s
+
+real	0m1.195s
+user	0m1.051s
+sys	0m0.140s
+======== wave ========
+
+real	0m0.923s
+user	0m0.380s
+sys	0m0.525s
+
+real	0m0.597s
+user	0m0.427s
+sys	0m0.167s
+
+real	0m3.604s
+user	0m3.156s
+sys	0m0.391s
+
+real	0m3.166s
+user	0m2.928s
+sys	0m0.220s
+
+real	0m3.475s
+user	0m3.314s
+sys	0m0.152s
+
+real	0m3.341s
+user	0m2.903s
+sys	0m0.381s
+
+real	0m1.627s
+user	0m1.322s
+sys	0m0.288s
+
+real	0m1.260s
+user	0m1.132s
+sys	0m0.124s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526_2245.dat
+[skip] VLAST_data_260526  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260526)
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_0000.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0000
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_0000.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0000.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m2.819s
+user	0m1.962s
+sys	0m0.713s
+
+real	0m2.002s
+user	0m1.767s
+sys	0m0.208s
+
+real	0m0.955s
+user	0m0.747s
+sys	0m0.193s
+
+real	0m6.558s
+user	0m5.474s
+sys	0m1.001s
+
+real	1m47.355s
+user	1m38.980s
+sys	0m8.073s
+
+real	0m2.529s
+user	0m2.316s
+sys	0m0.203s
+======== ped ========
+
+real	0m0.692s
+user	0m0.285s
+sys	0m0.399s
+
+real	0m0.779s
+user	0m0.615s
+sys	0m0.151s
+
+real	0m0.632s
+user	0m0.446s
+sys	0m0.179s
+
+real	0m4.779s
+user	0m4.160s
+sys	0m0.499s
+
+real	0m4.786s
+user	0m4.600s
+sys	0m0.171s
+
+real	0m1.445s
+user	0m1.163s
+sys	0m0.274s
+======== amp ========
+
+real	0m0.908s
+user	0m0.353s
+sys	0m0.529s
+
+real	0m0.605s
+user	0m0.449s
+sys	0m0.154s
+
+real	0m3.966s
+user	0m3.494s
+sys	0m0.424s
+
+real	0m1.436s
+user	0m1.215s
+sys	0m0.208s
+
+real	0m1.352s
+user	0m1.213s
+sys	0m0.134s
+
+real	0m3.700s
+user	0m3.183s
+sys	0m0.480s
+
+real	0m1.223s
+user	0m0.978s
+sys	0m0.231s
+
+real	0m1.155s
+user	0m0.985s
+sys	0m0.166s
+======== wave ========
+
+real	0m0.979s
+user	0m0.384s
+sys	0m0.582s
+
+real	0m0.586s
+user	0m0.423s
+sys	0m0.160s
+
+real	0m3.680s
+user	0m3.240s
+sys	0m0.406s
+
+real	0m1.156s
+user	0m0.966s
+sys	0m0.178s
+
+real	0m1.025s
+user	0m0.913s
+sys	0m0.110s
+
+real	0m3.731s
+user	0m3.290s
+sys	0m0.403s
+
+real	0m1.300s
+user	0m1.049s
+sys	0m0.235s
+
+real	0m1.208s
+user	0m1.053s
+sys	0m0.151s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0000.dat
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_0310.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0310
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_0310.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0310.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m3.469s
+user	0m2.251s
+sys	0m0.902s
+
+real	0m2.103s
+user	0m1.871s
+sys	0m0.200s
+
+real	0m0.820s
+user	0m0.650s
+sys	0m0.154s
+
+real	0m7.838s
+user	0m6.443s
+sys	0m1.347s
+
+real	1m33.594s
+user	1m26.243s
+sys	0m7.101s
+
+real	0m2.870s
+user	0m2.602s
+sys	0m0.255s
+======== ped ========
+
+real	0m1.254s
+user	0m0.420s
+sys	0m0.819s
+
+real	0m0.931s
+user	0m0.717s
+sys	0m0.187s
+
+real	0m0.620s
+user	0m0.440s
+sys	0m0.174s
+
+real	0m4.747s
+user	0m4.120s
+sys	0m0.577s
+
+real	0m4.587s
+user	0m4.409s
+sys	0m0.141s
+
+real	0m1.402s
+user	0m1.124s
+sys	0m0.271s
+======== amp ========
+
+real	0m1.262s
+user	0m0.419s
+sys	0m0.777s
+
+real	0m0.578s
+user	0m0.412s
+sys	0m0.164s
+
+real	0m4.113s
+user	0m3.666s
+sys	0m0.411s
+
+real	0m1.475s
+user	0m1.209s
+sys	0m0.197s
+
+real	0m1.360s
+user	0m1.218s
+sys	0m0.138s
+
+real	0m3.252s
+user	0m2.782s
+sys	0m0.413s
+
+real	0m1.406s
+user	0m1.120s
+sys	0m0.271s
+
+real	0m1.218s
+user	0m1.055s
+sys	0m0.159s
+======== wave ========
+
+real	0m1.176s
+user	0m0.434s
+sys	0m0.730s
+
+real	0m0.602s
+user	0m0.447s
+sys	0m0.152s
+
+real	0m3.945s
+user	0m3.471s
+sys	0m0.414s
+
+real	0m1.493s
+user	0m1.248s
+sys	0m0.230s
+
+real	0m1.404s
+user	0m1.257s
+sys	0m0.143s
+
+real	0m3.457s
+user	0m3.003s
+sys	0m0.396s
+
+real	0m1.229s
+user	0m0.975s
+sys	0m0.235s
+
+real	0m1.215s
+user	0m1.070s
+sys	0m0.141s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0310.dat
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_0700.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0700
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_0700.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0700.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m2.834s
+user	0m1.831s
+sys	0m0.742s
+
+real	0m2.264s
+user	0m1.968s
+sys	0m0.193s
+
+real	0m0.971s
+user	0m0.781s
+sys	0m0.174s
+
+real	0m6.707s
+user	0m5.558s
+sys	0m1.038s
+
+real	1m51.607s
+user	1m42.436s
+sys	0m8.800s
+
+real	0m2.769s
+user	0m2.525s
+sys	0m0.233s
+======== ped ========
+
+real	0m1.140s
+user	0m0.393s
+sys	0m0.676s
+
+real	0m0.940s
+user	0m0.730s
+sys	0m0.190s
+
+real	0m0.626s
+user	0m0.462s
+sys	0m0.158s
+
+real	0m4.691s
+user	0m4.171s
+sys	0m0.472s
+
+real	0m4.608s
+user	0m4.387s
+sys	0m0.167s
+
+real	0m1.634s
+user	0m1.334s
+sys	0m0.290s
+======== amp ========
+
+real	0m1.116s
+user	0m0.405s
+sys	0m0.668s
+
+real	0m0.612s
+user	0m0.452s
+sys	0m0.157s
+
+real	0m4.027s
+user	0m3.546s
+sys	0m0.419s
+
+real	0m1.287s
+user	0m1.055s
+sys	0m0.219s
+
+real	0m1.275s
+user	0m1.135s
+sys	0m0.136s
+
+real	0m3.507s
+user	0m3.048s
+sys	0m0.399s
+
+real	0m1.269s
+user	0m1.025s
+sys	0m0.229s
+
+real	0m1.215s
+user	0m1.063s
+sys	0m0.148s
+======== wave ========
+
+real	0m1.074s
+user	0m0.401s
+sys	0m0.660s
+
+real	0m0.596s
+user	0m0.439s
+sys	0m0.155s
+
+real	0m4.029s
+user	0m3.600s
+sys	0m0.395s
+
+real	0m1.498s
+user	0m1.238s
+sys	0m0.246s
+
+real	0m1.456s
+user	0m1.317s
+sys	0m0.135s
+
+real	0m3.478s
+user	0m3.079s
+sys	0m0.370s
+
+real	0m1.329s
+user	0m1.050s
+sys	0m0.257s
+
+real	0m1.208s
+user	0m1.067s
+sys	0m0.137s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_0700.dat
+==========================================
+[run]  /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_1100.dat
+输出:   /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_1100
+==========================================
+输入: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/data_microsat/VLAST_data_260527_1100.dat
+输出根目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_1100.dat
+开关: cosmic=true ped=true amp=true wave=true
+======== cosmic ========
+
+real	0m2.620s
+user	0m1.785s
+sys	0m0.698s
+
+real	0m1.745s
+user	0m1.529s
+sys	0m0.190s
+
+real	0m1.032s
+user	0m0.840s
+sys	0m0.179s
+
+real	0m6.895s
+user	0m5.678s
+sys	0m1.140s
+
+real	1m44.787s
+user	1m36.483s
+sys	0m8.022s
+
+real	0m2.401s
+user	0m2.136s
+sys	0m0.255s
+======== ped ========
+
+real	0m1.052s
+user	0m0.376s
+sys	0m0.629s
+
+real	0m0.762s
+user	0m0.604s
+sys	0m0.145s
+
+real	0m0.597s
+user	0m0.428s
+sys	0m0.163s
+
+real	0m4.365s
+user	0m3.834s
+sys	0m0.462s
+
+real	0m4.601s
+user	0m4.435s
+sys	0m0.143s
+
+real	0m1.201s
+user	0m0.980s
+sys	0m0.214s
+======== amp ========
+
+real	0m0.926s
+user	0m0.361s
+sys	0m0.552s
+
+real	0m0.610s
+user	0m0.436s
+sys	0m0.172s
+
+real	0m3.682s
+user	0m3.236s
+sys	0m0.391s
+
+real	0m1.408s
+user	0m1.193s
+sys	0m0.198s
+
+real	0m1.379s
+user	0m1.228s
+sys	0m0.146s
+
+real	0m3.826s
+user	0m3.302s
+sys	0m0.492s
+
+real	0m1.322s
+user	0m1.041s
+sys	0m0.267s
+
+real	0m1.182s
+user	0m1.050s
+sys	0m0.128s
+======== wave ========
+
+real	0m0.853s
+user	0m0.323s
+sys	0m0.517s
+
+real	0m0.612s
+user	0m0.456s
+sys	0m0.153s
+
+real	0m4.356s
+user	0m3.802s
+sys	0m0.517s
+
+real	0m1.361s
+user	0m1.147s
+sys	0m0.200s
+
+real	0m1.426s
+user	0m1.284s
+sys	0m0.137s
+
+real	0m3.305s
+user	0m2.931s
+sys	0m0.348s
+
+real	0m1.263s
+user	0m1.021s
+sys	0m0.228s
+
+real	0m1.234s
+user	0m1.089s
+sys	0m0.141s
+完成: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_1100.dat
+[skip] VLAST_data_260527_1541  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_1541)
+[skip] VLAST_data_260527_1700  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_1700)
+[skip] VLAST_data_260527_1740  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260527_1740)
+[skip] VLAST_data_260528_0930  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260528_0930)
+[skip] VLAST_data_260528_1430  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260528_1430)
+[skip] VLAST_data_260528_2100  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260528_2100)
+[skip] VLAST_data_260528_2300  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260528_2300)
+[skip] VLAST_data_260529_0950  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260529_0950)
+[skip] VLAST_data_260529_2120  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260529_2120)
+[skip] VLAST_data_260529_2305  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260529_2305)
+[skip] VLAST_data_260530_1000  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260530_1000)
+[skip] VLAST_data_260530_1300  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/VLAST_data_260530_1300)
+[skip] CsI_Calo_260531_2038  (已存在 /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat/CsI_Calo_260531_2038)
+==========================================
+批量完成: 跳过=30  新处理=22  失败=0
+结果目录: /home/test/wangjiaxuan/VLAST-P/USTC_VP_ANA/microsate_flightModel_260525/comprehensive_ana/result_microsat
