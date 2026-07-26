@@ -1,6 +1,6 @@
 csi_draw_trigger_id: [1, 2, 3, 4, 5]
 calo_draw_trigger_id: [0, 1, 2, 5, 6, 7, 8, 9]
 package_mode_id: 8
-# 示例：按需要改 TimeCode 界（秒，相对基准 2024-06-26 10:40:57 北京时间）
+# 示例：按需要改 TimeCode 界（秒，相对基准 2025-01-01 00:00:00 北京时间）
 time_code_min: 0
-time_code_max: 1.0e12
+time_code_max: 1e12

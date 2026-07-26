@@ -21,9 +21,24 @@ ROOT.gStyle.SetOptStat("")
 # hmh/hbh/hml/hbl 多 pad 图是否做 Landau×Gauss 拟合并画红线与 MPV；也可用 plot_sig(..., do_fit=False) 或命令行 --no-sig-fit
 SIG_FIT_ENABLED = True
 
+PLOT_ALL_ROOT = "plot_all.root"
+
 # main_hlr / back_hlr 的 TGraph 线性拟合区间（与 draw_one_ratio 一致）
 HL_RATIO_FIT_XLO = 200.
 HL_RATIO_FIT_XHI = 16000.
+
+
+def _write_canvas_to_plot_all(canvas, key_name):
+    """把 canvas 写入 plot_all.root（同名则覆盖）。"""
+    mode = "UPDATE" if os.path.isfile(PLOT_ALL_ROOT) else "RECREATE"
+    fout = ROOT.TFile.Open(PLOT_ALL_ROOT, mode)
+    if not fout or fout.IsZombie():
+        print("[VPlot] cannot open %s for write" % PLOT_ALL_ROOT)
+        return
+    fout.cd()
+    canvas.Write(key_name, ROOT.TObject.kOverwrite)
+    fout.Close()
+    print("[VPlot] wrote %s -> %s" % (key_name, PLOT_ALL_ROOT))
 
 
 def _hl_ratio_graph_name(ratio_name, channel):
@@ -186,15 +201,16 @@ def plot_sig(name, do_fit=None):
     histos = []
     fit_info_list = []  # 每个 pad 的 (ffit, integral_above, mpv)
     if name in ["hmh", "hbh"]:
-        fit_xlo, fit_xhi = 5500., 15000.
+        # 与 draw_calo 临时增益 hist 临时范围一致（5000–30000）
+        fit_xlo, fit_xhi = 5000., 30000.
         sv_mp, sv_width, sv_sig = 9000., 800., 400.
-        pllo_mp, plhi_mp = 5500., 14000.
+        pllo_mp, plhi_mp = 5000., 20000.
         pllo_w, plhi_w = 100., 3000.
         pllo_s, plhi_s = 50., 2000.
     else:
-        fit_xlo, fit_xhi = 600., 1500.
+        fit_xlo, fit_xhi = 600., 3000.
         sv_mp, sv_width, sv_sig = 800., 150., 80.
-        pllo_mp, plhi_mp = 600., 1400.
+        pllo_mp, plhi_mp = 600., 2000.
         pllo_w, plhi_w = 30., 500.
         pllo_s, plhi_s = 10., 300.
 
@@ -328,7 +344,9 @@ def plot_sig(name, do_fit=None):
         pt.Draw()
         pt_keep.append(pt)
 
-    c.SaveAs("Sig_" + name + ".png")
+    key = "Sig_" + name
+    c.SaveAs(key + ".png")
+    _write_canvas_to_plot_all(c, key)
 
 
 # 廊道卷积高斯 (Landau*Gaussian) 拟合，基于 ROOT langaus.C
@@ -361,15 +379,15 @@ def get_mpv_list(name, hist_path="hist_calo.root"):
     if not infile or infile.IsZombie():
         return []
     if name in ["hmh", "hbh"]:
-        fit_xlo, fit_xhi = 5500., 15000.
+        fit_xlo, fit_xhi = 5000., 30000.
         sv_mp, sv_width, sv_sig = 9000., 800., 400.
-        pllo_mp, plhi_mp = 5500., 14000.
+        pllo_mp, plhi_mp = 5000., 20000.
         pllo_w, plhi_w = 100., 3000.
         pllo_s, plhi_s = 50., 2000.
     else:
-        fit_xlo, fit_xhi = 600., 1500.
+        fit_xlo, fit_xhi = 600., 3000.
         sv_mp, sv_width, sv_sig = 800., 150., 80.
-        pllo_mp, plhi_mp = 600., 1400.
+        pllo_mp, plhi_mp = 600., 2000.
         pllo_w, plhi_w = 30., 500.
         pllo_s, plhi_s = 10., 300.
     out = []
@@ -415,8 +433,8 @@ def get_mpv_list(name, hist_path="hist_calo.root"):
 
 
 def plot_sig_hg_langaus():
-    """对 Main_HG(hmh) 和 Back_HG(hbh) 在 5000-15000 ADC 做 Landau*Gaussian 拟合并出图"""
-    fit_xlo, fit_xhi = 5000., 15000.
+    """对 Main_HG(hmh) 和 Back_HG(hbh) 在 5500-30000 ADC 做 Landau*Gaussian 拟合并出图"""
+    fit_xlo, fit_xhi = 5500., 30000.
     infile = ROOT.TFile.Open("hist.root", "READ")
     for hname, title, outname in [("hmh", "Main HG", "Sig_hmh_langaus"), ("hbh", "Back HG", "Sig_hbh_langaus")]:
         histo = infile.Get(hname)
@@ -434,8 +452,8 @@ def plot_sig_hg_langaus():
             continue
         # 初值: Landau Width, MP, Area, GSigma (ADC 尺度)
         sv = [800., 9000., integral * 0.1, 400.]
-        pllo = [100., 5000., 1., 50.]
-        plhi = [3000., 14000., 1e10, 2000.]
+        pllo = [100., 5500., 1., 50.]
+        plhi = [3000., 20000., 1e10, 2000.]
         fname = "langaufcn_" + hname
         ffit = ROOT.TF1(fname, _langaufun, fit_xlo, fit_xhi, 4)
         ffit.SetParameters(sv[0], sv[1], sv[2], sv[3])
@@ -445,7 +463,7 @@ def plot_sig_hg_langaus():
         histo.Fit(ffit, "RB0Q")
         c = ROOT.TCanvas("c_" + hname, "", 800, 600)
         histo.GetXaxis().SetRangeUser(fit_xlo, fit_xhi)
-        histo.SetTitle(title + " (5000-15000 ADC);ADC;Entries")
+        histo.SetTitle(title + " (5500-30000 ADC);ADC;Entries")
         histo.Draw("H")
         ffit.SetTitle("Landau#otimesGauss")
         ffit.SetLineColor(ROOT.kRed)
@@ -635,7 +653,9 @@ def plot_ped(name, do_fit=None):
             pt.AddText(f"Sigma = {sigma:.2f}" if sigma is not None else "Sigma = N/A")
             pt.Draw()
             pt_keep.append(pt)
-    c.SaveAs("Plat_" + name + ".png")
+    key = "Plat_" + name
+    c.SaveAs(key + ".png")
+    _write_canvas_to_plot_all(c, key)
 
 
 def plot_2dsingle(name, leg, txt, r1, r2):

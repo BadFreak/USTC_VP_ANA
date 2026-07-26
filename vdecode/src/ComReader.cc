@@ -53,8 +53,8 @@ void ComReader::checkPacketCrc(uint16_t recv_crc, const char* body, int body_len
 		logger->error("CRC check failed [{}]: recv=0x{:04X} calc=0x{:04X}", tag, recv_crc, calc_crc);
 }
 
-// 基准时刻（北京时间）：2024-06-26 10:40:57；TimeCode 为相对该时刻的秒数
-static const int kTimeBaseY = 2024, kTimeBaseMo = 8, kTimeBaseD = 3;
+// 基准时刻（北京时间）：2025-01-01 00:00:00；TimeCode 为相对该时刻的秒数
+static const int kTimeBaseY = 2025, kTimeBaseMo = 1, kTimeBaseD = 1;
 
 static long long timeCodeKey8(double timeCode)
 {
@@ -115,7 +115,8 @@ static const int kMhWaveThreshold[25] = {
 static const int kBhWaveThreshold[25] = {
     1111, 1170, 1447, 1453, 1582, 1144, 1080, 1159, 1426, 1297, 1320, 938, 1478, 1297, 1434,
     1158, 1180, 1386, 1346, 1451, 957, 1064, 1305, 1158, 1687};
-static const int kCsIWaveThreshold[8] = {1205, 1264, 1077, 1244, 1098, 1254, 1157, 1151};
+// static const int kCsIWaveThreshold[8] = {1205, 1264, 1077, 1244, 1098, 1254, 1157, 1151};
+static const int kCsIWaveThreshold[8] = {1168, 1207, 990, 1215, 1034, 1209, 1120, 1121};
 static constexpr int kCsIFirstCrossRunLength = 10; // 首过阈点 + 其后 9 点共 10 点须全部过阈
 static constexpr int kCsIFirstCrossLateIndex = 65; // 8 通道首点位置取 max，> 65 则记录该事例
 
@@ -184,7 +185,7 @@ static bool cdWavePlotDir(TFile* fout, const char* parent)
 	fout->cd(parent);
 	return true;
 }
-static const int kTimeBaseH = 10, kTimeBaseMi = 26, kTimeBaseS = 43;
+static const int kTimeBaseH = 0, kTimeBaseMi = 0, kTimeBaseS = 0;
 static double secFromYearStart(int y, int mo, int d, int H, int M, int S) {
 	static const int cum[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 	int doy = cum[mo - 1] + (d - 1);
@@ -1170,7 +1171,7 @@ void ComReader::decode(const std::string& filename, const std::string& yamlname)
 		yaml_time_code_min = config["time_code_min"].as<double>();
 		yaml_time_code_max = config["time_code_max"].as<double>();
 		yaml_time_filter_enable = true;
-		logger->info("TimeCode filter: [{}, {}] (base BJT 2024-06-26 10:40:57)", yaml_time_code_min,
+		logger->info("TimeCode filter: [{}, {}] (base BJT 2025-01-01 00:00:00)", yaml_time_code_min,
 		             yaml_time_code_max);
 	}
 	file->seekg(0, std::ios::beg);

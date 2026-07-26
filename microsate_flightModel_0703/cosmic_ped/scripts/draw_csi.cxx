@@ -15,6 +15,26 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <sys/stat.h>
+
+static void WriteCanvasToPlotAll(TCanvas* c, const TString& saveDir, const TString& keyName)
+{
+    if (!c)
+        return;
+    const TString path = saveDir + "/plot_all.root";
+    struct stat st;
+    const bool exists = (stat(path.Data(), &st) == 0);
+    TFile* fout = TFile::Open(path, exists ? "UPDATE" : "RECREATE");
+    if (!fout || fout->IsZombie()) {
+        std::cerr << "Error: cannot open " << path << " for write" << std::endl;
+        return;
+    }
+    fout->cd();
+    c->Write(keyName, TObject::kOverwrite);
+    fout->Close();
+    delete fout;
+    std::cout << "Wrote " << keyName << " -> " << path << std::endl;
+}
 
 // Landau×Gaussian，与 VPlot_calo.py::_langaufun / ROOT langaus.C 一致
 static Double_t langaufun(Double_t* x, Double_t* par)
@@ -46,12 +66,12 @@ static bool FitLandauGauss(TH1D* h, TF1*& ffit, double& mpv)
     if (!h || h->Integral() <= 0)
         return false;
 
-    constexpr double fit_xlo = 1500.;
-    constexpr double fit_xhi = 4500.;
+    constexpr double fit_xlo = 1000.;
+    constexpr double fit_xhi = 14000.;
     constexpr double sv_width = 300.;
     constexpr double sv_sig = 150.;
-    constexpr double pllo_mp = 1200.;
-    constexpr double plhi_mp = 4800.;
+    constexpr double pllo_mp = 1500.;
+    constexpr double plhi_mp = 12000.;
     constexpr double pllo_w = 50.;
     constexpr double plhi_w = 1500.;
     constexpr double pllo_s = 20.;
@@ -218,6 +238,7 @@ void DrawOneCanvas(TTree* tree,
 
     TString pngName = saveDir + "/" + outName + ".png";
     c->SaveAs(pngName);
+    WriteCanvasToPlotAll(c, saveDir, outName);
 
     std::cout << "Saved: " << pngName << std::endl;
 }
@@ -253,9 +274,9 @@ void draw_csi(const char* filename = "result_Calo_cosmic_20260403_1422.root")
     if (pos != kNPOS) saveDir = fullpath(0, pos);
 
 
-    // CellADC 扣除台基（CellPLAT）：固定范围 2000 ~ 6000
+    // CellADC 扣除台基（CellPLAT）：固定范围 1000 ~ 14000
     DrawOneCanvas(csiTree, "CellADC", cellIDs, saveDir,
-                  "CellADC_4x2", 200, 1000, 5000, "CellPLAT");
+                  "CellADC_4x2", 200, 1000, 14000, "CellPLAT");
 
     // CellPLAT: 固定范围 700 ~ 1300
     DrawOneCanvas(csiTree, "CellPLAT", cellIDs, saveDir,

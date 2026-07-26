@@ -77,8 +77,10 @@ void draw_ped(std::string fname,
     TGraph *gfee3 = f(3);
     TGraph *gfee4 = f(4);
     const int n_bins = 500;
-    const double e_min = 400.;    // Sig_hmh / Sig_hbh 等的横轴下限
-    const double e_max = 15000.;  // 横轴上限
+    const double e_min_hg = 5000.;   // 高增益横轴下限
+    const double e_min_lg = 400.;    // 低增益横轴下限
+    const double e_max_hg = 30000.;  // 高增益横轴上限
+    const double e_max_lg = 3000.;   // 低增益横轴上限
     static double log_bins[n_bins + 1]; // 对数 bin 边界（如需）
 
     TH1D *hmh = nullptr;
@@ -90,7 +92,7 @@ void draw_ped(std::string fname,
 
     if (useLogBin) {
         double log_min = 0; // 10^0 = 1
-        double log_max = 4.4; // 10^4.2 = 15848.9
+        double log_max = 4.48; // ~30199，覆盖高增益上限 30000
         double log_bin_width = (log_max - log_min) / n_bins;
         for (int i = 0; i <= n_bins; i++) {
             log_bins[i] = TMath::Power(10, log_min + i * log_bin_width);
@@ -102,12 +104,12 @@ void draw_ped(std::string fname,
         hh  = new TH1D("hh","hE",n_bins,log_bins);
         hl  = new TH1D("hl","hE",n_bins,log_bins);
     } else {
-        hmh = new TH1D("hmh","hE",n_bins,e_min,e_max);
-        hml = new TH1D("hml","hE",n_bins,e_min,e_max);
-        hbh = new TH1D("hbh","hE",n_bins,e_min,e_max);
-        hbl = new TH1D("hbl","hE",n_bins,e_min,e_max);
-        hh  = new TH1D("hh","hE",n_bins,e_min,e_max);
-        hl  = new TH1D("hl","hE",n_bins,e_min,e_max);
+        hmh = new TH1D("hmh","hE",n_bins,e_min_hg,e_max_hg);
+        hml = new TH1D("hml","hE",n_bins,e_min_lg,e_max_lg);
+        hbh = new TH1D("hbh","hE",n_bins,e_min_hg,e_max_hg);
+        hbl = new TH1D("hbl","hE",n_bins,e_min_lg,e_max_lg);
+        hh  = new TH1D("hh","hE",n_bins,e_min_hg,e_max_hg);
+        hl  = new TH1D("hl","hE",n_bins,e_min_lg,e_max_lg);
     }
     std::unordered_map<int,TH1D*> umap_hpmh;
 	std::unordered_map<int,TH1D*> umap_hpml;
@@ -131,10 +133,10 @@ void draw_ped(std::string fname,
             umap_hbh[i]=new TH1D(Form("hbh_%d",i),Form("Back_High_%d",i),n_bins,log_bins);
             umap_hbl[i]=new TH1D(Form("hbl_%d",i),Form("Back_Low_%d",i),n_bins,log_bins);
         } else {
-            umap_hmh[i]=new TH1D(Form("hmh_%d",i),Form("Main_High_%d",i),n_bins/4,e_min,e_max);
-            umap_hml[i]=new TH1D(Form("hml_%d",i),Form("Main_Low_%d",i),n_bins/10,e_min,e_max/10);
-            umap_hbh[i]=new TH1D(Form("hbh_%d",i),Form("Back_High_%d",i),n_bins/4,e_min,e_max);
-            umap_hbl[i]=new TH1D(Form("hbl_%d",i),Form("Back_Low_%d",i),n_bins/10,e_min,e_max/10);
+            umap_hmh[i]=new TH1D(Form("hmh_%d",i),Form("Main_High_%d",i),n_bins/4,e_min_hg,e_max_hg);
+            umap_hml[i]=new TH1D(Form("hml_%d",i),Form("Main_Low_%d",i),n_bins/10,e_min_lg,e_max_lg);
+            umap_hbh[i]=new TH1D(Form("hbh_%d",i),Form("Back_High_%d",i),n_bins/4,e_min_hg,e_max_hg);
+            umap_hbl[i]=new TH1D(Form("hbl_%d",i),Form("Back_Low_%d",i),n_bins/10,e_min_lg,e_max_lg);
         }
 	}
 	float N_total = float(*df_work.Count());
