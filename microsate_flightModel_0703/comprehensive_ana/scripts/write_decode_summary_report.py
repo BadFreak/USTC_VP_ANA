@@ -61,6 +61,27 @@ def _time_range_summary(tr):
     return f"[{tr.get('beijing_min', '?')} .. {tr.get('beijing_max', '?')}]"
 
 
+def _segment_block(text):
+    """lack_trigger 里 # segments 到 # gap_count 的分段。"""
+    if not text:
+        return []
+    lines = text.splitlines()
+    start = None
+    for i, line in enumerate(lines):
+        if line.startswith("# segments"):
+            start = i + 1
+            break
+    if start is None:
+        return []
+    out = []
+    for line in lines[start:]:
+        if line.startswith("# segment_count=") or line.startswith("# gap_count="):
+            break
+        if line.strip():
+            out.append(line)
+    return out
+
+
 def _parse_gap_count(text):
     if not text:
         return None
@@ -238,6 +259,13 @@ def write_report(outroot, basename):
             parts.append(f"calo gap_count={calo_gap if calo_gap is not None else '?'}")
 
         lines.append(f"- {mode}: " + ", ".join(parts))
+        for tag, lack_text in (("csi", csi_text), ("calo", calo_lack_text)):
+            block = _segment_block(lack_text)
+            if not block:
+                continue
+            lines.append(f"  {tag} 分段:")
+            for row in block:
+                lines.append(f"    {row}")
 
     lines.append("")
     for mode in MODES:

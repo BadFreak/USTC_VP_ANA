@@ -2,16 +2,19 @@
 # 对一个 .dat：在 result/<文件名>/ 下生成 cosmic ped amp wave 四个子目录
 # package_mode_id: 0=cosmic, 4=ped, 8=amp, 12=wave（与 cosmic_ped / calib 的 yaml 一致）
 #
-# 用法: bash run_comprehensive.sh [data_microsat/xxx.dat]
-#       bash run_comprehensive.sh -f [data_microsat/xxx.dat]   # 强制重跑，不 skip
-# 改下面开关，只跑需要的模式
-FILE_NAME=VLAST_data_260706_1848
+# 用法: bash run_comprehensive.sh [data.dat]
+#       bash run_comprehensive.sh -f [--decode-only] [--modes cosmic,ped]
+#            [--data-dir DIR] [--result-dir DIR] [data.dat]
+# 改下面开关，只跑需要的模式（可被 --modes 覆盖）
+FILE_NAME=VLAST_data_260922_1754
 RUN_COSMIC=true
 RUN_PED=true
 RUN_AMP=true
 RUN_WAVE=true
-FORCE_RUN=true
 
+FORCE_RUN=true
+DECODE_ONLY=false
+FIT_COSMIC_OPTION=""	#"--no-sig-fit"
 FILE_TYPE=".dat"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODEL_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -20,8 +23,8 @@ REPO_ROOT="$(cd "$MODEL_DIR/.." && pwd)"
 VDECODE="$REPO_ROOT/vdecode/build/vdecode"
 COSMIC_PED="$MODEL_DIR/cosmic_ped"
 CALIB="$MODEL_DIR/calib"
-DATA_DIR="$SCRIPT_DIR/data_zhangjiang"
-RESULT_DIR="$SCRIPT_DIR/result_zhangjiang"
+DATA_DIR="$SCRIPT_DIR/data_thirdFSE"
+RESULT_DIR="$SCRIPT_DIR/result_thirdFSE"
 
 CFG_DIR="$SCRIPT_DIR/config"
 CFG_COSMIC="$CFG_DIR/cosmic.yaml"
@@ -71,9 +74,48 @@ while [[ $# -gt 0 ]]; do
 			FORCE_RUN=true
 			shift
 			;;
+		--decode-only)
+			DECODE_ONLY=true
+			shift
+			;;
+		--modes)
+			shift
+			[[ $# -gt 0 ]] || { echo "--modes 需要参数，如 cosmic 或 cosmic,ped"; exit 1; }
+			RUN_COSMIC=false
+			RUN_PED=false
+			RUN_AMP=false
+			RUN_WAVE=false
+			IFS=',' read -r -a _modes <<< "$1"
+			for m in "${_modes[@]}"; do
+				case "$m" in
+					cosmic) RUN_COSMIC=true ;;
+					ped) RUN_PED=true ;;
+					amp) RUN_AMP=true ;;
+					wave) RUN_WAVE=true ;;
+					*) echo "未知 mode: $m（支持 cosmic|ped|amp|wave）"; exit 1 ;;
+				esac
+			done
+			shift
+			;;
+		--data-dir)
+			shift
+			[[ $# -gt 0 ]] || { echo "--data-dir 需要目录"; exit 1; }
+			DATA_DIR="$1"
+			shift
+			;;
+		--result-dir)
+			shift
+			[[ $# -gt 0 ]] || { echo "--result-dir 需要目录"; exit 1; }
+			RESULT_DIR="$1"
+			shift
+			;;
 		-h|--help)
-			echo "用法: bash run_comprehensive.sh [-f|--force] [data.pkg]"
-			echo "  -f, --force  忽略已完成检查，强制重跑"
+			echo "用法: bash run_comprehensive.sh [-f|--force] [--decode-only] [--modes cosmic,ped] [--data-dir DIR] [--result-dir DIR] [data.pkg]"
+			echo "  -f, --force       忽略已完成检查，强制重跑"
+			echo "  --decode-only     只跑 vdecode（及 decode 后检查图），跳过 pack/draw/plot"
+			echo "  --modes LIST      只跑指定模式，逗号分隔：cosmic,ped,amp,wave"
+			echo "  --data-dir DIR    无位置参数时从此目录取默认文件；batch 会传入"
+			echo "  --result-dir DIR  输出根目录（默认脚本内 RESULT_DIR）"
 			exit 0
 			;;
 		-*)
@@ -135,6 +177,11 @@ run_cosmic_ped() {
 		echo "[$name] 未找到 $PLOT_AFTER_DECODE"
 	fi
 
+	if $DECODE_ONLY; then
+		echo "[$name] --decode-only: 跳过 pack/draw/plot"
+		return 0
+	fi
+
 	time root -l -b -q "$COSMIC_PED/scripts/pack_calo_by_trigger.cxx(\"$resultfile\",\"pack_$resultfile\")" \
 		>log/log_pack_calo 2>&1
 	cp -f "pack_$resultfile" pack.root
@@ -149,7 +196,7 @@ run_cosmic_ped() {
 	fi
 	time root -l -b -q "$COSMIC_PED/scripts/draw_calo.cxx(1,\"pack_$resultfile\",${n_crystal_hit},${hit_threshold},false)" \
 		>log/log_draw_calo 2>&1
-	time python "$COSMIC_PED/scripts/VPlot_calo.py" >log/log_plot_calo 2>&1
+	time python "$COSMIC_PED/scripts/VPlot_calo.py" $FIT_COSMIC_OPTION >log/log_plot_calo 2>&1
 
 	time root -l -b -q "$COSMIC_PED/scripts/draw_csi.cxx(\"$resultfile\")" >log/log_draw_csi 2>&1
 }
@@ -179,6 +226,11 @@ run_calib() {
 		echo "[$name] 未找到 $PLOT_AFTER_DECODE"
 	fi
 
+	if $DECODE_ONLY; then
+		echo "[$name] --decode-only: 跳过 calib draw/plot"
+		return 0
+	fi
+
 	find_lack_trigger_check "$name" "$resultfile"
 
 	time root -l -b -q "$CALIB/scripts/draw_calo.cxx(1,\"${resultfile}\")" >log/log_draw_calo 2>&1
@@ -192,7 +244,7 @@ run_calib() {
 
 echo "输入: $binfile"
 echo "输出根目录: $outroot"
-echo "开关: cosmic=$RUN_COSMIC ped=$RUN_PED amp=$RUN_AMP wave=$RUN_WAVE force=$FORCE_RUN"
+echo "开关: cosmic=$RUN_COSMIC ped=$RUN_PED amp=$RUN_AMP wave=$RUN_WAVE force=$FORCE_RUN decode_only=$DECODE_ONLY"
 
 if $RUN_COSMIC; then
 	if ! $FORCE_RUN && mode_done cosmic; then

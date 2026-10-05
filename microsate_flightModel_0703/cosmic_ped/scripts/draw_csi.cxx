@@ -14,8 +14,57 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <cstring>
+#include <algorithm>
 #include <cmath>
+#include <cctype>
+#include <fstream>
 #include <sys/stat.h>
+
+static std::string yamlScalar(const std::string& path, const std::string& key, const std::string& defv)
+{
+    std::ifstream in(path.c_str());
+    if (!in)
+        return defv;
+    std::string line;
+    while (std::getline(in, line)) {
+        auto cpos = line.find('#');
+        if (cpos != std::string::npos)
+            line = line.substr(0, cpos);
+        auto kpos = line.find(key);
+        if (kpos == std::string::npos)
+            continue;
+        bool only_space_before = true;
+        for (size_t i = 0; i < kpos; ++i) {
+            if (!std::isspace(static_cast<unsigned char>(line[i]))) {
+                only_space_before = false;
+                break;
+            }
+        }
+        if (!only_space_before)
+            continue;
+        auto col = line.find(':', kpos + key.size());
+        if (col == std::string::npos)
+            continue;
+        std::string val = line.substr(col + 1);
+        auto a = val.find_first_not_of(" \t\r\n\"'");
+        auto b = val.find_last_not_of(" \t\r\n\"'");
+        if (a == std::string::npos)
+            return defv;
+        return val.substr(a, b - a + 1);
+    }
+    return defv;
+}
+
+// 与 Calo VPlot_calo.py 共用 cosmic.yaml hg_sig_plot_mode
+static bool hgSigPlotModeIsRoom(const char* cfg_path = "config.yaml")
+{
+    std::string mode = yamlScalar(cfg_path, "hg_sig_plot_mode", "thermal");
+    for (char& c : mode)
+        c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+    return mode == "room" || mode == "roomtemp" || mode == "rt";
+}
 
 static void WriteCanvasToPlotAll(TCanvas* c, const TString& saveDir, const TString& keyName)
 {
@@ -61,17 +110,14 @@ static Double_t langaufun(Double_t* x, Double_t* par)
     return par[2] * step * sum * invsq2pi / par[3];
 }
 
-static bool FitLandauGauss(TH1D* h, TF1*& ffit, double& mpv)
+static bool FitLandauGauss(TH1D* h, TF1*& ffit, double& mpv,
+                           double fit_xlo, double fit_xhi, double pllo_mp, double plhi_mp)
 {
     if (!h || h->Integral() <= 0)
         return false;
 
-    constexpr double fit_xlo = 1000.;
-    constexpr double fit_xhi = 14000.;
     constexpr double sv_width = 300.;
     constexpr double sv_sig = 150.;
-    constexpr double pllo_mp = 1500.;
-    constexpr double plhi_mp = 12000.;
     constexpr double pllo_w = 50.;
     constexpr double plhi_w = 1500.;
     constexpr double pllo_s = 20.;
@@ -171,7 +217,13 @@ void DrawOneCanvas(TTree* tree,
                    int nbins,
                    double xmin,
                    double xmax,
-                   const char* pedestalVarName = nullptr)
+                   const char* pedestalVarName = nullptr,
+                   double plot_xmin = -1.,
+                   double plot_xmax = -1.,
+                   double fit_xlo = -1.,
+                   double fit_xhi = -1.,
+                   double pllo_mp = 1500.,
+                   double plhi_mp = 12000.)
 {
     TCanvas* c = new TCanvas(outName, outName, 1800, 900);
     c->Divide(4, 2, 0.001, 0.001);
@@ -197,12 +249,17 @@ void DrawOneCanvas(TTree* tree,
         TString title = Form("%s, CellID = %d", xtitle.Data(), cellID);
         BeautifyHist(h, title, xtitle);
 
+        const double x1 = (plot_xmin > 0.) ? plot_xmin : xmin;
+        const double x2 = (plot_xmax > 0.) ? plot_xmax : xmax;
+        h->GetXaxis()->SetRangeUser(x1, x2);
         h->Draw("hist");
 
         if (pedestalVarName && strlen(pedestalVarName) > 0 && TString(varName) == "CellADC") {
             TF1* ffit = nullptr;
             double mpv = 0.;
-            if (FitLandauGauss(h, ffit, mpv)) {
+            const double flo = (fit_xlo > 0.) ? fit_xlo : xmin;
+            const double fhi = (fit_xhi > 0.) ? fit_xhi : xmax;
+            if (FitLandauGauss(h, ffit, mpv, flo, fhi, pllo_mp, plhi_mp)) {
                 ffit->SetLineColor(kRed + 1);
                 ffit->SetLineWidth(2);
                 ffit->Draw("same");
@@ -274,9 +331,23 @@ void draw_csi(const char* filename = "result_Calo_cosmic_20260403_1422.root")
     if (pos != kNPOS) saveDir = fullpath(0, pos);
 
 
-    // CellADC 扣除台基（CellPLAT）：固定范围 1000 ~ 14000
+    const bool room = hgSigPlotModeIsRoom("config.yaml");
+    // 填图覆盖 thermal(1000–14000) 与 room(1000–5000)；显示/拟合随 hg_sig_plot_mode
+    const double hist_xmin = 1000.;
+    const double hist_xmax = 14000.;
+    const double csi_plot_xmin = 1000.;
+    const double csi_plot_xmax = room ? 5000. : 14000.;
+    const double csi_fit_xlo = 1000.;
+    const double csi_fit_xhi = room ? 5000. : 14000.;
+    const double csi_pllo_mp = room ? 1200. : 1500.;
+    const double csi_plhi_mp = room ? 4800. : 12000.;
+    std::cout << "hg_sig_plot_mode=" << (room ? "room" : "thermal")
+              << " CsI MIP range=[" << csi_plot_xmin << ", " << csi_plot_xmax << "]" << std::endl;
+
     DrawOneCanvas(csiTree, "CellADC", cellIDs, saveDir,
-                  "CellADC_4x2", 200, 1000, 14000, "CellPLAT");
+                  "CellADC_4x2", 200, hist_xmin, hist_xmax, "CellPLAT",
+                  csi_plot_xmin, csi_plot_xmax, csi_fit_xlo, csi_fit_xhi,
+                  csi_pllo_mp, csi_plhi_mp);
 
     // CellPLAT: 固定范围 700 ~ 1300
     DrawOneCanvas(csiTree, "CellPLAT", cellIDs, saveDir,

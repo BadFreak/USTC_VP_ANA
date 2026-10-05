@@ -77,9 +77,10 @@ void draw_ped(std::string fname,
     TGraph *gfee3 = f(3);
     TGraph *gfee4 = f(4);
     const int n_bins = 500;
-    const double e_min_hg = 5000.;   // 高增益横轴下限
+    // 高增益填图覆盖 room(4000–15000) 与 thermal(5000–30000)；显示范围由 yaml hg_sig_plot_mode 决定
+    const double e_min_hg = 200.;
     const double e_min_lg = 400.;    // 低增益横轴下限
-    const double e_max_hg = 30000.;  // 高增益横轴上限
+    const double e_max_hg = 30000.;
     const double e_max_lg = 3000.;   // 低增益横轴上限
     static double log_bins[n_bins + 1]; // 对数 bin 边界（如需）
 

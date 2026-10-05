@@ -27,6 +27,61 @@ PLOT_ALL_ROOT = "plot_all.root"
 HL_RATIO_FIT_XLO = 200.
 HL_RATIO_FIT_XHI = 16000.
 
+# cosmic.yaml hg_sig_plot_mode: thermal=温度循环 5000–30000；room=常温 4000–15000
+HG_SIG_THERMAL_XLO, HG_SIG_THERMAL_XHI = 5000., 30000.
+HG_SIG_ROOM_XLO, HG_SIG_ROOM_XHI = 4000., 15000.
+
+
+def _yaml_scalar(path, key, default=""):
+    if not os.path.isfile(path):
+        return default
+    with open(path) as f:
+        for raw in f:
+            line = raw.split("#", 1)[0]
+            if ":" not in line:
+                continue
+            k, v = line.split(":", 1)
+            if k.strip() == key:
+                return v.strip().strip("\"'").lower()
+    return default
+
+
+def _hg_sig_xrange(cfg_path="config.yaml"):
+    mode = _yaml_scalar(cfg_path, "hg_sig_plot_mode", "thermal")
+    if mode in ("room", "roomtemp", "rt"):
+        return HG_SIG_ROOM_XLO, HG_SIG_ROOM_XHI, "room"
+    return HG_SIG_THERMAL_XLO, HG_SIG_THERMAL_XHI, "thermal"
+
+
+def _hg_sig_fit_params(xlo, xhi, mode):
+    if mode == "room":
+        return {
+            "fit_xlo": xlo,
+            "fit_xhi": xhi,
+            "sv_mp": 7000.,
+            "sv_width": 800.,
+            "sv_sig": 400.,
+            "pllo_mp": 4000.,
+            "plhi_mp": min(14000., xhi),
+            "pllo_w": 100.,
+            "plhi_w": 3000.,
+            "pllo_s": 50.,
+            "plhi_s": 2000.,
+        }
+    return {
+        "fit_xlo": xlo,
+        "fit_xhi": xhi,
+        "sv_mp": 9000.,
+        "sv_width": 800.,
+        "sv_sig": 400.,
+        "pllo_mp": 5000.,
+        "plhi_mp": 20000.,
+        "pllo_w": 100.,
+        "plhi_w": 3000.,
+        "pllo_s": 50.,
+        "plhi_s": 2000.,
+    }
+
 
 def _write_canvas_to_plot_all(canvas, key_name):
     """把 canvas 写入 plot_all.root（同名则覆盖）。"""
@@ -201,12 +256,15 @@ def plot_sig(name, do_fit=None):
     histos = []
     fit_info_list = []  # 每个 pad 的 (ffit, integral_above, mpv)
     if name in ["hmh", "hbh"]:
-        # 与 draw_calo 临时增益 hist 临时范围一致（5000–30000）
-        fit_xlo, fit_xhi = 5000., 30000.
-        sv_mp, sv_width, sv_sig = 9000., 800., 400.
-        pllo_mp, plhi_mp = 5000., 20000.
-        pllo_w, plhi_w = 100., 3000.
-        pllo_s, plhi_s = 50., 2000.
+        hg_xlo, hg_xhi, hg_mode = _hg_sig_xrange()
+        p = _hg_sig_fit_params(hg_xlo, hg_xhi, hg_mode)
+        fit_xlo, fit_xhi = p["fit_xlo"], p["fit_xhi"]
+        sv_mp, sv_width, sv_sig = p["sv_mp"], p["sv_width"], p["sv_sig"]
+        pllo_mp, plhi_mp = p["pllo_mp"], p["plhi_mp"]
+        pllo_w, plhi_w = p["pllo_w"], p["plhi_w"]
+        pllo_s, plhi_s = p["pllo_s"], p["plhi_s"]
+        print("[VPlot] plot_sig(%s): hg_sig_plot_mode=%s range=[%.0f, %.0f]" % (
+            name, hg_mode, fit_xlo, fit_xhi))
     else:
         fit_xlo, fit_xhi = 600., 3000.
         sv_mp, sv_width, sv_sig = 800., 150., 80.
@@ -379,11 +437,13 @@ def get_mpv_list(name, hist_path="hist_calo.root"):
     if not infile or infile.IsZombie():
         return []
     if name in ["hmh", "hbh"]:
-        fit_xlo, fit_xhi = 5000., 30000.
-        sv_mp, sv_width, sv_sig = 9000., 800., 400.
-        pllo_mp, plhi_mp = 5000., 20000.
-        pllo_w, plhi_w = 100., 3000.
-        pllo_s, plhi_s = 50., 2000.
+        hg_xlo, hg_xhi, hg_mode = _hg_sig_xrange()
+        p = _hg_sig_fit_params(hg_xlo, hg_xhi, hg_mode)
+        fit_xlo, fit_xhi = p["fit_xlo"], p["fit_xhi"]
+        sv_mp, sv_width, sv_sig = p["sv_mp"], p["sv_width"], p["sv_sig"]
+        pllo_mp, plhi_mp = p["pllo_mp"], p["plhi_mp"]
+        pllo_w, plhi_w = p["pllo_w"], p["plhi_w"]
+        pllo_s, plhi_s = p["pllo_s"], p["plhi_s"]
     else:
         fit_xlo, fit_xhi = 600., 3000.
         sv_mp, sv_width, sv_sig = 800., 150., 80.

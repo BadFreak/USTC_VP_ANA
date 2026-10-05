@@ -1,9 +1,11 @@
 #include "ComReader.hh"
 #include <cmath>
+#include <cctype>
 #include <cstdio>
 #include <fstream>
 #include <limits>
 #include <stdexcept>
+#include <string>
 #include <TGraph.h>
 #include <TCanvas.h>
 #include <TLegend.h>
@@ -54,13 +56,19 @@ void ComReader::checkPacketCrc(uint16_t recv_crc, const char* body, int body_len
 }
 
 // 基准时刻（北京时间）：2025-01-01 00:00:00；TimeCode 为相对该时刻的秒数
-static const int kTimeBaseY = 2025, kTimeBaseMo = 1, kTimeBaseD = 1;
+// 第三次模飞基准时 2024-10-22 13:02:27
+static const int kTimeBaseY = 2024, kTimeBaseMo = 10, kTimeBaseD = 22;
+//static const int kTimeBaseY = 2025, kTimeBaseMo = 1, kTimeBaseD = 1;
+
+static long long timeCodeKeyMs(double timeCode)
+{
+	return static_cast<long long>(std::llround(timeCode * 1000.0));
+}
 
 static long long timeCodeKey8(double timeCode)
 {
 	// TimeCode 毫秒整数的前八位 = 秒（与 caloTimeCode.png 横轴整数部分一致）
-	const auto tc_ms = static_cast<long long>(std::llround(timeCode * 1000.0));
-	return tc_ms / 1000;
+	return timeCodeKeyMs(timeCode) / 1000;
 }
 
 static TString waveTag(int triggerID, double timeCode)
@@ -68,12 +76,41 @@ static TString waveTag(int triggerID, double timeCode)
 	return Form("TriggerID_%d_TimeCode_%lld", triggerID, timeCodeKey8(timeCode));
 }
 
-static bool waveDrawMatch(const std::vector<WaveDrawEvent>& events,
+// list 匹配：yaml 含小数 → 按毫秒精确匹配；yaml 为整秒 → 按 key8 匹配（兼容旧配置）
+static bool timeCodeInDrawList(const std::vector<double>& time_codes, double time_code)
+{
+	const long long tc_ms = timeCodeKeyMs(time_code);
+	const long long tc_key8 = tc_ms / 1000;
+	for (double y : time_codes) {
+		const long long y_ms = timeCodeKeyMs(y);
+		if (y_ms % 1000 != 0) {
+			if (y_ms == tc_ms)
+				return true;
+		} else if (y_ms / 1000 == tc_key8) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// mode: "range" → TimeCode key8 ∈ [draw_timecode_min, draw_timecode_max]；
+//       "list"  → TimeCode ∈ draw_time_code（可含小数，ms）；
+//       空/其它 → 旧逻辑兼容：events 对 > TimeCode 列表 > TriggerID 列表
+// time_code_min/max 只过滤解包，不在此匹配。
+static bool waveDrawMatch(const std::string& mode, const std::vector<WaveDrawEvent>& events,
                           const std::vector<unsigned int>& trigger_ids,
-                          const std::vector<long long>& time_code_keys, unsigned int trigger_id,
-                          double time_code)
+                          const std::vector<double>& time_codes, unsigned int trigger_id,
+                          double time_code, bool draw_range_enable, long long draw_tc_min,
+                          long long draw_tc_max)
 {
 	const long long key = timeCodeKey8(time_code);
+	if (mode == "range") {
+		if (!draw_range_enable)
+			return false;
+		return key >= draw_tc_min && key <= draw_tc_max;
+	}
+	if (mode == "list")
+		return timeCodeInDrawList(time_codes, time_code);
 	if (!events.empty()) {
 		for (const auto& e : events) {
 			if (e.trigger_id == trigger_id && e.time_code_key8 == key)
@@ -81,10 +118,8 @@ static bool waveDrawMatch(const std::vector<WaveDrawEvent>& events,
 		}
 		return false;
 	}
-	if (!time_code_keys.empty()) {
-		return std::find(time_code_keys.begin(), time_code_keys.end(), key) !=
-		       time_code_keys.end();
-	}
+	if (!time_codes.empty())
+		return timeCodeInDrawList(time_codes, time_code);
 	if (!trigger_ids.empty()) {
 		return std::find(trigger_ids.begin(), trigger_ids.end(), trigger_id) !=
 		       trigger_ids.end();
@@ -117,8 +152,8 @@ static const int kBhWaveThreshold[25] = {
     1158, 1180, 1386, 1346, 1451, 957, 1064, 1305, 1158, 1687};
 // static const int kCsIWaveThreshold[8] = {1205, 1264, 1077, 1244, 1098, 1254, 1157, 1151};
 static const int kCsIWaveThreshold[8] = {1168, 1207, 990, 1215, 1034, 1209, 1120, 1121};
-static constexpr int kCsIFirstCrossRunLength = 10; // 首过阈点 + 其后 9 点共 10 点须全部过阈
-static constexpr int kCsIFirstCrossLateIndex = 65; // 8 通道首点位置取 max，> 65 则记录该事例
+static constexpr int kCsIFirstCrossRunLength = 10; // 分通道 hist：首过阈点 + 其后 9 点共 10 点
+static constexpr int kCsIFirstCross5RunLength = 5;  // 总 TH1D：首过阈点 + 其后 4 点共 5 点
 
 static unsigned int csIWaveSample(const char* b, size_t chn, size_t sp)
 {
@@ -127,17 +162,17 @@ static unsigned int csIWaveSample(const char* b, size_t chn, size_t sp)
 	return static_cast<unsigned int>(d1 << 8 | d2);
 }
 
-// 每通道独立：找第一个 ADC > threshold 的点；该点及其后 9 点须全部过阈，否则不记录（-1）
-static int csIFirstConsecutiveCrossIndex(const char* b, size_t chn, int threshold)
+// 每通道独立：找第一个 ADC > threshold 的点；该点及其后 (runLength-1) 点须全部过阈，否则 -1
+static int csIFirstConsecutiveCrossIndex(const char* b, size_t chn, int threshold, int runLength)
 {
 	const auto thr = static_cast<unsigned int>(threshold);
 	for (size_t sp = 0; sp < 128; ++sp) {
 		if (csIWaveSample(b, chn, sp) <= thr)
 			continue;
-		if (sp + kCsIFirstCrossRunLength > 128)
+		if (static_cast<int>(sp) + runLength > 128)
 			return -1;
-		for (int k = 1; k < kCsIFirstCrossRunLength; ++k) {
-			if (csIWaveSample(b, chn, sp + k) <= thr)
+		for (int k = 1; k < runLength; ++k) {
+			if (csIWaveSample(b, chn, sp + static_cast<size_t>(k)) <= thr)
 				return -1;
 		}
 		return static_cast<int>(sp);
@@ -185,7 +220,8 @@ static bool cdWavePlotDir(TFile* fout, const char* parent)
 	fout->cd(parent);
 	return true;
 }
-static const int kTimeBaseH = 0, kTimeBaseMi = 0, kTimeBaseS = 0;
+static const int kTimeBaseH = 13, kTimeBaseMi = 2, kTimeBaseS = 27;
+//static const int kTimeBaseH = 0, kTimeBaseMi = 0, kTimeBaseS = 0;
 static double secFromYearStart(int y, int mo, int d, int H, int M, int S) {
 	static const int cum[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 	int doy = cum[mo - 1] + (d - 1);
@@ -531,8 +567,10 @@ bool ComReader::readCsI(){
 		}
 		if (yaml_csi_first_cross_hist_enable_)
 			fillCsIFirstCrossHist(buf);
-		if (waveDrawMatch(yaml_draw_wave_events_, yaml_csi_trigger_id, yaml_csi_draw_time_code_,
-		                  CsI_TriggerID, Time_Code)) {
+		if (waveDrawMatch(yaml_wave_draw_mode_, yaml_draw_wave_events_, yaml_draw_trigger_id_,
+		                  yaml_draw_time_code_, CsI_TriggerID, Time_Code,
+		                  yaml_draw_timecode_range_enable_, yaml_draw_timecode_min_,
+		                  yaml_draw_timecode_max_)) {
 			drawCsIWave(buf, CsI_TriggerID);
 		}
 		readCsIWave(buf);
@@ -597,8 +635,10 @@ bool ComReader::readCalo(){
 		if (recv_asum != calc_asum) {
 			logger->error("Accumulation summation check failed: {} != {}", recv_asum, calc_asum);
 		}
-		if (waveDrawMatch(yaml_draw_wave_events_, yaml_calo_trigger_id, yaml_calo_draw_time_code_,
-		                  static_cast<unsigned int>(Calo_TriggerID), Time_Code)) {
+		if (waveDrawMatch(yaml_wave_draw_mode_, yaml_draw_wave_events_, yaml_draw_trigger_id_,
+		                  yaml_draw_time_code_, static_cast<unsigned int>(Calo_TriggerID),
+		                  Time_Code, yaml_draw_timecode_range_enable_, yaml_draw_timecode_min_,
+		                  yaml_draw_timecode_max_)) {
 			drawCaloWave(buf, Calo_TriggerID);
 		}
 		readCaloWave(buf); 
@@ -646,20 +686,28 @@ void ComReader::fillCsIFirstCrossHist(const char* buf)
 {
 	if (!yaml_csi_first_cross_hist_enable_)
 		return;
-	int max_first_sp = -1;
+	// 只统计 yaml 中挑选的画图事例（range/list 共用）
+	if (!waveDrawMatch(yaml_wave_draw_mode_, yaml_draw_wave_events_, yaml_draw_trigger_id_,
+	                   yaml_draw_time_code_, static_cast<unsigned int>(CsI_TriggerID), Time_Code,
+	                   yaml_draw_timecode_range_enable_, yaml_draw_timecode_min_,
+	                   yaml_draw_timecode_max_))
+		return;
+	const double tc_key8 = static_cast<double>(timeCodeKey8(Time_Code));
 	for (size_t chn = 0; chn < 8; ++chn) {
-		const int first_sp =
-		    csIFirstConsecutiveCrossIndex(buf, chn, kCsIWaveThreshold[chn]);
+		const int first_sp = csIFirstConsecutiveCrossIndex(
+		    buf, chn, kCsIWaveThreshold[chn], kCsIFirstCrossRunLength);
 		if (first_sp >= 0 && csi_first_cross_hist_[chn])
 			csi_first_cross_hist_[chn]->Fill(static_cast<double>(first_sp));
-		if (first_sp > max_first_sp)
-			max_first_sp = first_sp;
-	}
-	if (max_first_sp > kCsIFirstCrossLateIndex) {
-		const long long tc_key8 = timeCodeKey8(Time_Code);
-		csi_first_cross_late_.push_back({static_cast<unsigned int>(CsI_TriggerID), tc_key8});
-		logger->info("CsI first-cross late: TriggerID={} TimeCode={} max_first_sp={}",
-		             CsI_TriggerID, tc_key8, max_first_sp);
+
+		// 不过 max：只要该通道过阈（连续 5 点），就把首点位置填入总 TH1D / TGraph
+		const int first_sp5 = csIFirstConsecutiveCrossIndex(
+		    buf, chn, kCsIWaveThreshold[chn], kCsIFirstCross5RunLength);
+		if (first_sp5 < 0)
+			continue;
+		if (csi_first_cross5_all_)
+			csi_first_cross5_all_->Fill(static_cast<double>(first_sp5));
+		csi_cross5_tc_.push_back(tc_key8);
+		csi_cross5_sp_.push_back(static_cast<double>(first_sp5));
 	}
 }
 
@@ -672,21 +720,64 @@ void ComReader::writeCsIFirstCrossHist()
 	const auto dot = base.rfind('.');
 	if (dot != std::string::npos)
 		base = base.substr(0, dot);
-	if (!csi_first_cross_late_.empty()) {
-		const std::string late_path = base + "_csi_first_cross_late.txt";
-		std::ofstream ofs(late_path);
-		if (ofs) {
-			ofs << "# TriggerID TimeCode_key8 (max over 8 chn: first over-thr point + next 9 all over thr, start > "
-			    << kCsIFirstCrossLateIndex << ")\n";
-			for (const auto& e : csi_first_cross_late_)
-				ofs << e.trigger_id << ' ' << e.time_code_key8 << '\n';
-			logger->info("CsI first-cross late: {} entries -> {}", csi_first_cross_late_.size(),
-			             late_path);
+
+	if (!fout->GetDirectory("CsIFirstCrossHist"))
+		fout->mkdir("CsIFirstCrossHist");
+	fout->cd("CsIFirstCrossHist");
+
+	// 总 TH1D：挑选事例中，过阈通道各自填充「连续 5 点过阈」首点位置（不取 max）
+	if (csi_first_cross5_all_) {
+		const long long n5 = static_cast<long long>(csi_first_cross5_all_->GetEntries());
+		if (n5 > 0) {
+			csi_first_cross5_all_->SetLineColor(kBlue + 1);
+			csi_first_cross5_all_->SetLineWidth(2);
+			csi_first_cross5_all_->Write();
+			auto* c5 = new TCanvas("cCsI_first_cross5_all",
+			                       "CsI over-thr chn: first of 5 consecutive over thr", 900, 600);
+			csi_first_cross5_all_->Draw("HIST");
+			c5->Write();
+			const std::string png5 = base + "_CsI_first_cross5_all.png";
+			c5->SaveAs(png5.c_str());
+			delete c5;
+			logger->info("CsI first-cross5 all TH1D written ({} fills) -> {}", n5, png5);
 		} else {
-			logger->warn("CsI first-cross late: failed to write {}", late_path);
+			logger->info("CsI first-cross5 all TH1D: no crossing entries");
 		}
+		delete csi_first_cross5_all_;
+		csi_first_cross5_all_ = nullptr;
 	}
-	csi_first_cross_late_.clear();
+
+	// TGraph：x=TimeCode, y=首点位置；星号描点
+	if (!csi_cross5_tc_.empty()) {
+		const int np = static_cast<int>(csi_cross5_tc_.size());
+		auto* gr = new TGraph(np);
+		gr->SetName("gCsI_first_cross5_vs_timecode");
+		gr->SetTitle("CsI first-cross5 vs TimeCode;TimeCode;Start index");
+		for (int i = 0; i < np; ++i)
+			gr->SetPoint(i, csi_cross5_tc_[static_cast<size_t>(i)],
+			             csi_cross5_sp_[static_cast<size_t>(i)]);
+		gr->SetMarkerStyle(29); // 星号
+		gr->SetMarkerSize(1.6);
+		gr->SetMarkerColor(kBlue + 1);
+		gr->Write();
+
+		auto* cg = new TCanvas("cCsI_first_cross5_vs_timecode",
+		                       "CsI first-cross5 vs TimeCode", 1200, 700);
+		gr->Draw("AP");
+		gr->GetXaxis()->SetTitle("TimeCode");
+		gr->GetYaxis()->SetTitle("Start index");
+		gr->GetYaxis()->SetRangeUser(-2., 130.);
+		cg->Write();
+		const std::string pngg = base + "_CsI_first_cross5_vs_timecode.png";
+		cg->SaveAs(pngg.c_str());
+		delete cg;
+		delete gr;
+		logger->info("CsI first-cross5 vs TimeCode TGraph written ({} pts) -> {}", np, pngg);
+	} else {
+		logger->info("CsI first-cross5 vs TimeCode TGraph: no points");
+	}
+	csi_cross5_tc_.clear();
+	csi_cross5_sp_.clear();
 
 	long long total_entries = 0;
 	for (int i = 0; i < 8; ++i) {
@@ -694,17 +785,13 @@ void ComReader::writeCsIFirstCrossHist()
 			total_entries += static_cast<long long>(csi_first_cross_hist_[i]->GetEntries());
 	}
 	if (total_entries == 0) {
-		logger->info("CsI first-cross hist: no crossing entries, skip canvas");
+		logger->info("CsI first-cross hist: no crossing entries, skip per-chn canvas");
 		for (int i = 0; i < 8; ++i) {
 			delete csi_first_cross_hist_[i];
 			csi_first_cross_hist_[i] = nullptr;
 		}
 		return;
 	}
-
-	if (!fout->GetDirectory("CsIFirstCrossHist"))
-		fout->mkdir("CsIFirstCrossHist");
-	fout->cd("CsIFirstCrossHist");
 
 	auto* canvas = new TCanvas("cCsI_first_cross",
 	                           Form("CsI first over-thr + %d following all over thr",
@@ -755,7 +842,7 @@ bool ComReader::drawCsIWave(char *b, int triggerID) {
         }
         grWave[chn_i]->SetMarkerStyle(20);
         grWave[chn_i]->SetMarkerSize(0.5);
-        grWave[chn_i]->GetYaxis()->SetRangeUser(y0 - kWaveYHalfRange, y0 + kWaveYHalfRange);
+        grWave[chn_i]->GetYaxis()->SetRangeUser(y0 - kWaveYHalfRange, y0 + yaml_wave_y_add_);
         grWave[chn_i]->Draw("APL");
         styleWaveAxes(grWave[chn_i]);
         drawCsIWaveThresholdLegend(chn_i);
@@ -856,7 +943,7 @@ bool ComReader::drawCaloWave(char *b, int triggerID) {
 		}
 		grWave->SetMarkerStyle(20);
 		grWave->SetMarkerSize(0.5);
-		grWave->GetYaxis()->SetRangeUser(y0 - kWaveYHalfRange, y0 + kWaveYHalfRange);
+		grWave->GetYaxis()->SetRangeUser(y0 - kWaveYHalfRange, y0 + yaml_wave_y_add_);
 		grWave->Draw("APL");
 		styleWaveAxes(grWave);
 		drawWaveThresholdLegend(canvasIdx, cry);
@@ -1093,21 +1180,99 @@ void ComReader::decode(const std::string& filename, const std::string& yamlname)
 	logger->info("If Wave-mode possibly, read yaml: {}", yamlname);
 	config = YAML::LoadFile(yamlname);
 	yaml_package_mode_id = config["package_mode_id"].as<unsigned int>();
+	yaml_wave_draw_mode_.clear();
 	yaml_draw_wave_events_.clear();
-	yaml_calo_trigger_id.clear();
-	yaml_csi_trigger_id.clear();
-	yaml_calo_draw_time_code_.clear();
-	yaml_csi_draw_time_code_.clear();
+	yaml_draw_trigger_id_.clear();
+	yaml_draw_time_code_.clear();
+	yaml_draw_timecode_range_enable_ = false;
+	yaml_draw_timecode_min_ = 0;
+	yaml_draw_timecode_max_ = 0;
+	yaml_wave_y_add_ = 200.;
+
+	if (config["wave_y_add"])
+		yaml_wave_y_add_ = config["wave_y_add"].as<double>();
+	logger->info("Wave y-axis: [y0-200, y0+{}]", yaml_wave_y_add_);
+
+	if (config["wave_draw_mode"]) {
+		yaml_wave_draw_mode_ = config["wave_draw_mode"].as<std::string>();
+		for (char& c : yaml_wave_draw_mode_)
+			c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+		if (yaml_wave_draw_mode_ != "range" && yaml_wave_draw_mode_ != "list") {
+			logger->warn("Unknown wave_draw_mode '{}', fallback to auto", yaml_wave_draw_mode_);
+			yaml_wave_draw_mode_.clear();
+		}
+	}
+
+	auto appendUniqueUInt = [](std::vector<unsigned int>& dst, const std::vector<unsigned int>& src) {
+		for (unsigned int v : src) {
+			if (std::find(dst.begin(), dst.end(), v) == dst.end())
+				dst.push_back(v);
+		}
+	};
+	auto appendUniqueDouble = [](std::vector<double>& dst, const std::vector<double>& src) {
+		for (double v : src) {
+			const long long v_ms = static_cast<long long>(std::llround(v * 1000.0));
+			bool exists = false;
+			for (double d : dst) {
+				if (static_cast<long long>(std::llround(d * 1000.0)) == v_ms) {
+					exists = true;
+					break;
+				}
+			}
+			if (!exists)
+				dst.push_back(v);
+		}
+	};
+
+	// range：draw_timecode_min / draw_timecode_max（与解包 time_code_min/max 独立）
+	if (config["draw_timecode_min"] && config["draw_timecode_max"]) {
+		yaml_draw_timecode_min_ = config["draw_timecode_min"].as<long long>();
+		yaml_draw_timecode_max_ = config["draw_timecode_max"].as<long long>();
+		yaml_draw_timecode_range_enable_ = true;
+	}
+
+	// list：共用 draw_time_code（支持小数）；兼容旧 csi/calo_draw_time_code（合并）
+	if (config["draw_time_code"]) {
+		yaml_draw_time_code_ = config["draw_time_code"].as<std::vector<double>>();
+	} else {
+		if (config["csi_draw_time_code"])
+			appendUniqueDouble(yaml_draw_time_code_,
+			                   config["csi_draw_time_code"].as<std::vector<double>>());
+		if (config["calo_draw_time_code"])
+			appendUniqueDouble(yaml_draw_time_code_,
+			                   config["calo_draw_time_code"].as<std::vector<double>>());
+	}
+
+	// auto 兼容：旧 trigger 配置（range/list 模式不使用 TriggerID）
+	if (yaml_wave_draw_mode_.empty()) {
+		if (config["draw_trigger_id"]) {
+			yaml_draw_trigger_id_ = config["draw_trigger_id"].as<std::vector<unsigned int>>();
+		} else {
+			if (config["csi_draw_trigger_id"])
+				appendUniqueUInt(yaml_draw_trigger_id_,
+				                 config["csi_draw_trigger_id"].as<std::vector<unsigned int>>());
+			if (config["calo_draw_trigger_id"])
+				appendUniqueUInt(yaml_draw_trigger_id_,
+				                 config["calo_draw_trigger_id"].as<std::vector<unsigned int>>());
+		}
+	}
+
+	// 兼容旧 draw_wave_events（成对）；list 模式可从中提取 TimeCode
 	auto loadDrawWaveFromArrays = [&](const YAML::Node& triggers_node,
 	                                  const YAML::Node& time_codes_node) {
 		const auto triggers = triggers_node.as<std::vector<unsigned int>>();
-		const auto time_codes = time_codes_node.as<std::vector<long long>>();
+		const auto time_codes = time_codes_node.as<std::vector<double>>();
 		const size_t n = std::min(triggers.size(), time_codes.size());
 		if (triggers.size() != time_codes.size())
 			logger->warn("draw_wave trigger_id/time_code length mismatch: {} vs {}, using first {}",
 			             triggers.size(), time_codes.size(), n);
-		for (size_t i = 0; i < n; ++i)
-			yaml_draw_wave_events_.push_back({triggers[i], time_codes[i]});
+		if (yaml_wave_draw_mode_.empty()) {
+			for (size_t i = 0; i < n; ++i)
+				yaml_draw_wave_events_.push_back(
+				    {triggers[i], static_cast<long long>(std::llround(time_codes[i]))});
+		}
+		if (yaml_wave_draw_mode_ == "list" && yaml_draw_time_code_.empty())
+			appendUniqueDouble(yaml_draw_time_code_, time_codes);
 	};
 	if (config["draw_wave_trigger_id"] && config["draw_wave_time_code"]) {
 		loadDrawWaveFromArrays(config["draw_wave_trigger_id"], config["draw_wave_time_code"]);
@@ -1123,32 +1288,40 @@ void ComReader::decode(const std::string& filename, const std::string& yamlname)
 			WaveDrawEvent e;
 			e.trigger_id = item[0].as<unsigned int>();
 			e.time_code_key8 = item[1].as<long long>();
-			yaml_draw_wave_events_.push_back(e);
+			if (yaml_wave_draw_mode_.empty())
+				yaml_draw_wave_events_.push_back(e);
+			if (yaml_wave_draw_mode_ == "list" && yaml_draw_time_code_.empty())
+				appendUniqueDouble(yaml_draw_time_code_,
+				                   {static_cast<double>(e.time_code_key8)});
 		}
 	}
-	if (config["csi_draw_trigger_id"])
-		yaml_csi_trigger_id = config["csi_draw_trigger_id"].as<std::vector<unsigned int>>();
-	if (config["calo_draw_trigger_id"])
-		yaml_calo_trigger_id = config["calo_draw_trigger_id"].as<std::vector<unsigned int>>();
-	if (config["csi_draw_time_code"])
-		yaml_csi_draw_time_code_ = config["csi_draw_time_code"].as<std::vector<long long>>();
-	if (config["calo_draw_time_code"])
-		yaml_calo_draw_time_code_ = config["calo_draw_time_code"].as<std::vector<long long>>();
-	if (!yaml_draw_wave_events_.empty())
-		logger->info("Wave draw by (TriggerID, TimeCode key8) pairs: {} entries",
+
+	if (yaml_wave_draw_mode_ == "range") {
+		if (yaml_draw_timecode_range_enable_)
+			logger->info("Wave draw mode=range: TimeCode key8 in [{}, {}]", yaml_draw_timecode_min_,
+			             yaml_draw_timecode_max_);
+		else
+			logger->warn("Wave draw mode=range but draw_timecode_min/max missing; draw nothing");
+	} else if (yaml_wave_draw_mode_ == "list") {
+		logger->info("Wave draw mode=list: shared TimeCode={} (decimal ok, no TriggerID)",
+		             yaml_draw_time_code_.size());
+	} else if (!yaml_draw_wave_events_.empty()) {
+		logger->info("Wave draw auto: (TriggerID, TimeCode key8) pairs: {} entries",
 		             yaml_draw_wave_events_.size());
-	else if (!yaml_csi_draw_time_code_.empty() || !yaml_calo_draw_time_code_.empty())
-		logger->info("Wave draw fallback: CsI TimeCode key8={}, Calo TimeCode key8={}",
-		             yaml_csi_draw_time_code_.size(), yaml_calo_draw_time_code_.size());
-	else if (!yaml_csi_trigger_id.empty() || !yaml_calo_trigger_id.empty())
-		logger->info("Wave draw fallback: CsI TriggerID={}, Calo TriggerID={}",
-		             yaml_csi_trigger_id.size(), yaml_calo_trigger_id.size());
+	} else if (!yaml_draw_time_code_.empty()) {
+		logger->info("Wave draw auto: shared TimeCode={}", yaml_draw_time_code_.size());
+	} else if (!yaml_draw_trigger_id_.empty()) {
+		logger->info("Wave draw auto: shared TriggerID={}", yaml_draw_trigger_id_.size());
+	}
 	time_code_pass_valid_ = false;
 	time_code_calo_pass_valid_ = false;
 	time_code_csi_pass_valid_ = false;
 	yaml_time_filter_enable = false;
 	yaml_csi_first_cross_hist_enable_ = false;
-	csi_first_cross_late_.clear();
+	csi_cross5_tc_.clear();
+	csi_cross5_sp_.clear();
+	delete csi_first_cross5_all_;
+	csi_first_cross5_all_ = nullptr;
 	for (int i = 0; i < 8; ++i) {
 		delete csi_first_cross_hist_[i];
 		csi_first_cross_hist_[i] = nullptr;
@@ -1156,8 +1329,8 @@ void ComReader::decode(const std::string& filename, const std::string& yamlname)
 	if (config["csi_first_cross_hist"])
 		yaml_csi_first_cross_hist_enable_ = config["csi_first_cross_hist"].as<bool>();
 	if (yaml_csi_first_cross_hist_enable_) {
-		logger->info("CsI first-cross histogram enabled (first over-thr + {} following, 8 chn, 128 bins)",
-		             kCsIFirstCrossRunLength - 1);
+		logger->info("CsI first-cross histogram enabled (chn hist consecutive {}, all TH1D consecutive {})",
+		             kCsIFirstCrossRunLength, kCsIFirstCross5RunLength);
 		for (int i = 0; i < 8; ++i) {
 			csi_first_cross_hist_[i] = new TH1F(
 			    Form("hCsI_first_cross_chn%d", i),
@@ -1166,6 +1339,13 @@ void ComReader::decode(const std::string& filename, const std::string& yamlname)
 			    128, 0, 128);
 			csi_first_cross_hist_[i]->SetDirectory(nullptr);
 		}
+		csi_first_cross5_all_ = new TH1D(
+		    "hCsI_first_cross5_all",
+		    "CsI over-thr chn: first of 5 consecutive over thr;Start index;Entries",
+		    128, 0, 128);
+		csi_first_cross5_all_->SetDirectory(nullptr);
+		logger->info("CsI first-cross5 all TH1D + TimeCode TGraph enabled (consecutive {}, yaml events only)",
+		             kCsIFirstCross5RunLength);
 	}
 	if (config["time_code_min"] && config["time_code_max"]) {
 		yaml_time_code_min = config["time_code_min"].as<double>();

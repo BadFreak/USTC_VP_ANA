@@ -49,10 +49,6 @@ struct WaveDrawEvent {
     unsigned int trigger_id = 0;
     long long time_code_key8 = 0;
 };
-struct CsIFirstCrossLate {
-    unsigned int trigger_id = 0;
-    long long time_code_key8 = 0;
-};
 class ComReader{
 public:
 static ComReader& getInstance() {
@@ -84,18 +80,28 @@ private:
     std::string oname; //output file name
     YAML::Node config;
     unsigned int yaml_package_mode_id;
-    std::vector<WaveDrawEvent> yaml_draw_wave_events_;
-    std::vector<unsigned int> yaml_calo_trigger_id; 
-    std::vector<unsigned int> yaml_csi_trigger_id;
-    std::vector<long long> yaml_calo_draw_time_code_;
-    std::vector<long long> yaml_csi_draw_time_code_;
+    // wave_draw_mode: "range" | "list" | ""(auto，兼容旧 yaml)
+    // range: draw_timecode_min/max；list: draw_time_code（均与 TriggerID 无关）
+    // time_code_min/max 只做解包过滤，不参与画图匹配
+    std::string yaml_wave_draw_mode_;
+    std::vector<WaveDrawEvent> yaml_draw_wave_events_; // 兼容旧 (TriggerID, TimeCode) 对
+    std::vector<unsigned int> yaml_draw_trigger_id_;   // 仅 auto 兼容旧 trigger 配置
+    std::vector<double> yaml_draw_time_code_;          // list 模式：完整 TimeCode（可含小数，ms）
+    bool yaml_draw_timecode_range_enable_ = false;
+    long long yaml_draw_timecode_min_ = 0;
+    long long yaml_draw_timecode_max_ = 0;
+    double yaml_wave_y_add_ = 200.;                    // 纵轴 [y0-200, y0+Add]，默认 Add=200
     bool yaml_time_filter_enable = false;
     bool yaml_csi_first_cross_hist_enable_ = false;
     double yaml_time_code_min = 0.;
     double yaml_time_code_max = 0.;
     TH1F* csi_first_cross_hist_[8] = {nullptr, nullptr, nullptr, nullptr,
                                        nullptr, nullptr, nullptr, nullptr};
-    std::vector<CsIFirstCrossLate> csi_first_cross_late_;
+    // 挑选事例、过阈 CsI 通道：连续 5 点过阈的首点位置（每通道各自填充，不取 max）
+    TH1D* csi_first_cross5_all_ = nullptr;
+    // TGraph：x=TimeCode_key8, y=首点位置
+    std::vector<double> csi_cross5_tc_;
+    std::vector<double> csi_cross5_sp_;
     int nSkippedTime = 0;
     bool time_code_pass_valid_ = false;
     double time_code_pass_min_ = 0.;

@@ -64,23 +64,23 @@ static FitRange fitRangeForHist(const char* hname)
 	FitRange r{};
 	const TString name(hname);
 	if (name.BeginsWith("hmh") || name.BeginsWith("hbh")) {
-		r.fit_xlo = 6000.;
-		r.fit_xhi = 14000.;
+		r.fit_xlo = 5500.;
+		r.fit_xhi = 30000.;
 		r.sv_width = 800.;
 		r.sv_sig = 400.;
-		r.pllo_mp = 6000.;
-		r.plhi_mp = 14000.;
+		r.pllo_mp = 5500.;
+		r.plhi_mp = 20000.;
 		r.pllo_w = 100.;
 		r.plhi_w = 3000.;
 		r.pllo_s = 50.;
 		r.plhi_s = 2000.;
 	} else {
 		r.fit_xlo = 600.;
-		r.fit_xhi = 1500.;
+		r.fit_xhi = 3000.;
 		r.sv_width = 150.;
 		r.sv_sig = 80.;
 		r.pllo_mp = 600.;
-		r.plhi_mp = 1400.;
+		r.plhi_mp = 2000.;
 		r.pllo_w = 30.;
 		r.plhi_w = 500.;
 		r.pllo_s = 10.;
@@ -90,7 +90,7 @@ static FitRange fitRangeForHist(const char* hname)
 }
 
 constexpr double kPlotXmin = 5000.;
-constexpr double kPlotXmax = 15000.;
+constexpr double kPlotXmax = 30000.;
 constexpr double kPlotYmin = 0.;
 constexpr double kPlotYmax = 120.;
 

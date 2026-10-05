@@ -241,13 +241,14 @@ def plot_calorimeter():
                 "电流点1": pick(df, f"量能器FEE{n}-电源电流监测点1-data[11:0]", f"量能器FEE{n}-电源电流监测点1"),
                 "电流点2": pick(df, f"量能器FEE{n}-电源电流监测点2-data[11:0]", f"量能器FEE{n}-电源电流监测点2"),
             }
-        if n == 1:
-            temps = {f"温度点{k}": pick(df, f"量能器FEE1-温度监测点{k}") for k in [1, 2, 3, 4]}
-        else:
-            temps = {
-                f"温度点{k}": pick(df, f"量能器FEE{n}-温度监测点{k}-data[11:0]", f"量能器FEE{n}-温度监测点{k}")
-                for k in [1, 2, 3, 4]
-            }
+        temps = {
+            f"温度点{k}": pick(
+                df,
+                f"量能器FEE{n}-温度监测点{k}-data[11:0]",
+                f"量能器FEE{n}-温度监测点{k}",
+            )
+            for k in [1, 2, 3, 4]
+        }
         if n == 1:
             x = df[TIME_COL]
             cur_ma = {}
